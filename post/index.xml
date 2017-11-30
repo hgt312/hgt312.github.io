@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Even - A super concise theme for Hugo</title>
+    <link>http://localhost:1313/post/</link>
+    <description>Recent content in Posts on Even - A super concise theme for Hugo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    
+	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/deep-learning%E7%AC%94%E8%AE%B0%E5%BC%A0%E9%87%8F%E5%8E%8B%E7%BC%A9%E4%B8%80/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/deep-learning%E7%AC%94%E8%AE%B0%E5%BC%A0%E9%87%8F%E5%8E%8B%E7%BC%A9%E4%B8%80/</guid>
+      <description>参考Github项目：https://github.com/timgaripov/TensorNet-TF 参考论文链接：http://arxiv.org/abs/1509.06569
+在一个复杂的大型神经网络中，权重(Weights)的保存需要占用相当大的空间，尤其是在全连接层(FC-layers)部分。张量压缩是以张量(tensor)的形式保存权重矩阵的技术，能够在具有较高压缩率的情况下保持模型的准确率，从而得到一个轻量的模型。
+张量 张量(计算机领域的张量)即使不同维度的数组(array)，一维的张量就是向量(vector)，二维的张量即是矩阵(matrix)。 TT-format TT-format是文中提出的一种表示张量的方法。一个大张量可以表示为数个小张量的组合，就能大幅减小了需要储存的参数量。在深度神经网络的全连接层中，有许多参数是稀疏的(＝/≈0)、冗余的，如果能寻找到一个张量的低秩(rank)表示，就能将一个累乘的量转变成较小的量的累加。如上图所示，一个四维的张量(3*4*4*3)，被分解成了四个三维的张量(称为Core)，这个张量在(2,4,2,3)处的值就可以通过四个core中对应的矩阵相乘来得到。 在这个例子中，张量本身的参数量是3*4*4*3=144，而用TT-format进行表示只需要3*3+3*3*4+3*3*4+3*3=90个参数，这个例子的秩为3，如果能得到更低的秩，就可以得到更高的压缩率。
+除此之外，TT-format还可以用来表示矩阵和向量，并支持进行按位乘法、加法。
+TT-layer 在神经网络的全连接层中，前向传播需要计算y=Wx+b，反向传播则需要计算dW和db。
+通过将y,x,W,b分别以张量的形式表示，再转化成TT-format进行运算，既能节省内存，也能节省时间。同样，反向传播过程也能通过这种方法节约计算资源。
+计算量对比：</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E4%B8%80%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E4%B8%80%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</guid>
+      <description>Django: The web framework for perfectionists with deadlines. django是python最流行的框架之一，特点是大而全，自带模板系统、优秀的ORM框架，还有完善的后台管理系统。
+这次建站为了使用xadmin，考虑到其兼容性，故选择了python2.7.13，Django1.9.13(这个版本在今年上半年已经不再支持了，建议大家使用1.11LTS)
+xadmin是国人开发的基于django的后台管理系统，用到了bootstrap，还有许多自带的插件（然而我没怎么研究），虽然不知道比官方的强在哪里，不过挺好用的就是了
+Django settings.py配置 settings.py是django项目的配置文件，很多重要的参数都要在这里设置
+DEBUG 在开发环境中，DEBUG应设置为TRUE，在404、500等页面会有详细的错误提示，同时会自动启动用于处理静态文件的中间件
+ALLOWED_HOSTS ALLOWED_HOSTS设置允许访问的ip，DEBUG = TRUE时不用管它，DEBUG = FALSE时必须配置，通常配置为&amp;rsquo;*&amp;lsquo;即可
+INSTALLED_APPS &amp;amp; 根路径设置 INSTALLED_APPS是一个列表，收录所以需要加载的应用。在django项目中，我们自己创建的每个app自然都要加进去。
+通常，我们自建的app都放在根目录下，当项目很庞大时，app的数量就会很多。这是我们可以新建一个apps的package，将app们放进去，以便于目录结构的整洁。
+但这时有必要设置根路径了，下面这行代码就起了这样的作用
+sys.path.insert(0, os.path.join(BASE_DIR, &#39;apps&#39;))  AUTH_USER_MODEL &amp;amp; AUTHENTICATION_BACKENDS django自带有认证系统，但默认的user表有时并不能满足我们的需求。登陆方法也是，默认的登陆后台只能通过用户名进行登陆。这是我们就会用到这两个参数了。
+AUTH_USER_MODEL = &amp;quot;users.UserProfile&amp;quot; AUTHENTICATION_BACKENDS = ( &#39;users.views.CustomBackend&#39;, )  TEMPLATES &amp;amp; DATABASES django有自己默认的模板引擎，但也可以换成其他的，完全根据个人喜好。
+django中默认的数据库是sqlite3，同样可以选用其他数据库，也可以启用多个数据库。比如session的存储就能用到redis或mongodb。
+本地化设置 通常设置成这样即可：
+LANGUAGE_CODE = &#39;zh-hans&#39; TIME_ZONE = &#39;Asia/Shanghai&#39; USE_I18N = True USE_L10N = True USE_TZ = False  静态、媒体文件配置 STATIC_URL = &#39;/static/&#39; # STATICFILES_DIRS = ( # os.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E4%B8%89%E9%83%A8%E7%BD%B2%E4%B8%8A%E7%BA%BF/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E4%B8%89%E9%83%A8%E7%BD%B2%E4%B8%8A%E7%BA%BF/</guid>
+      <description>因为我是用windows开发，这个部署上线真是相当折腾orz
+这里我采用了nginx+django+uwsgi的方式，系统选用了阿里云的ubuntu16.04，用到的工具有Xshell 5和Xftp 5
+第一步：安装nginx 当然是先更新系统了
+apt-get update  上面是错误做法orz
+sudo apt-get update  这才是正确的做法，因为我们最好不要在日常工作中使用root用户（但下面我会省去sudo 233）
+接下来就是安装nginx了
+apt-get install nginx  在ubuntu中，nginx的目录结构如下：
+配置文件：/etc/nginx下； 启动程序文件：/usr/sbin/nginx下； 日志文件：/var/log/nginx/下，分别是access.log和error.log； 此外，/etc/init.d自动生成了启动脚本nginx。  nginx的操作
+sudo /etc/init.d/nginx start # 启动 sudo /etc/init.d/nginx stop # 停止 sudo /etc/init.d/nginx restart # 重启 ps -ef | grep nginx # 查看进程  第二步：配置环境 首先安装virtualenv
+pip install virtualenv  然后创建一个虚拟环境
+virtualenv --no-site-packages web  接着，激活虚拟环境
+source web/bin/activate 退出时使用deactivate  接下来安装必要的package，然后直接copy几个我改过源码的包。
+通常直接拷贝在site-packages目录中就能用，前提是这个包依赖安装好，并且本身不需要编译。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E4%BA%8Corm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E4%BA%8Corm/</guid>
+      <description>Django的ORM框架相当强大，只需要在每个app的models.py文件中创建Class即可，每个字段就是一个类的属性
+示例： from django.db import models from django.contrib.auth.models import AbstractUser # 用户信息模型 class UserProfile(AbstractUser): mobile = models.CharField(verbose_name=u&amp;quot;手机号码&amp;quot;, max_length=20, null=True, blank=True) gender = models.CharField( verbose_name=u&amp;quot;性别&amp;quot;, choices=((&amp;quot;male&amp;quot;, u&amp;quot;男&amp;quot;), (&amp;quot;female&amp;quot;, u&amp;quot;女&amp;quot;)), default=&amp;quot;male&amp;quot;, max_length=6) real_name = models.CharField(verbose_name=u&amp;quot;真实姓名&amp;quot;, max_length=50, null=True, blank=True) city = models.CharField(verbose_name=u&amp;quot;城市&amp;quot;, max_length=20, null=True, blank=True) introduction = models.TextField(verbose_name=u&amp;quot;个人介绍&amp;quot;, null=True, blank=True) class Meta: verbose_name = u&amp;quot;用户信息&amp;quot; verbose_name_plural = verbose_name def __unicode__(self): return self.username  modes.py中的类需要继承django.db中的models.Model，这个例子中继承了AbstractUser，这是django中用户类的原型，因为我要使用自己的用户模型，所以继承了它。在默认的用户模型中已经有了用户名、密码及邮箱，所以这里并没有设置。
+数据库中的数据类型在django中表现为不同的Field，常用的有CharField、TextField、FileField等。
+Fields共有的属性 这些Field共有的属性有null、blank、unique等，当然大部分Field还可以设置为主键（只能设置一个）
+null属性设置为True时，数据库中表现为字段可以为空；而blank设置为True时即表示这个属性在实例化类时必须进行赋值。
+unique属性：顾名思义，设置为True后该字段不能重复
+有时候需要通过多个字段判断唯一性，可以在Meta中设置：
+unique_together = (&amp;quot;value_1&amp;quot;, &amp;quot;value_2&amp;quot;)  primary_key属性，主键，不设置也可以，不设置的话会自动生成自增的字段id</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E5%9B%9B%E7%BD%91%E7%AB%99%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E5%9B%9B%E7%BD%91%E7%AB%99%E4%BC%98%E5%8C%96/</guid>
+      <description>建站完成了，但访问网站时可能体验并不那么满意。
+事实上，除了网络连接，影响浏览体验的细节还有很多需要优化。这里推荐一个网站：https://developers.google.com/speed/pagespeed/insights/
+这个网站会分析网页的性能并给出建议（注意是网页，不是网站），它会列出已采用的优化措施和未采用的优化措施，这些优化措施包括。
+ 启用压缩 按优先级排列可见内容 使用浏览器缓存 缩减 CSS 缩减 HTML 缩减 JavaScript 缩短服务器响应时间 避免使用着陆页重定向 清除首屏内容中阻止呈现的 JavaScript 和 CSS 优化图片  这里因为用的是nginx，所以启用压缩和设置浏览器缓存都相当简单。至于其他的内容，虽然繁琐，但也是很重要的，这就是考验前端功底的时候了~</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80numpy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80numpy/</guid>
+      <description>numpy文档链接：https://docs.scipy.org/doc/ ###numpy的核心数据结构：ndarray（n-dimension array，即多维数组） 示例：
+import numpy as np vector = np.array([5, 10, 15, 20]) matrix = np.array([[5, 10, 15], [20, 25, 30], [35, 40, 45]])  ###shape属性：获取矩阵的行数和列数
+print(vector.shape) &amp;gt;&amp;gt;&amp;gt; (4,) print(matrix.shape) &amp;gt;&amp;gt;&amp;gt; (2,3)  ###genfromtxt方法：从csv文件中读取数据 world_alcohol = np.genfromtxt(“world_alcohol.csv”,
+delimiter=”,”, dtype=”U75″) ###numpy中的数据类型有以下几种： &amp;gt;1. bool，布尔类型，值为 True 或 False &amp;gt;2. int，包含int16、int32 和 int64 &amp;gt;3. float，包含float16、float32 和 float64 &amp;gt;4. string，包含string 和 unicode
+利用dtype属性可以查看array的数据类型，array中的数据是相同的类型。array和python内置的list类型非常相似，这是二者非常不同的一点。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%89%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%962/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%89%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%962/</guid>
+      <description>###需要在同一张图绘制两条曲线时，调用两次plot方法即可，参数c、label可以分别指定颜色和标签，legend方法可以绘制图例 plt.plot(x_values, y_values1, c=’blue’, label=’Women’) plt.plot(x_values, y_values2, c=’green’, label=’Men’) plt.legend(loc=’upper right’) plt.title(‘Percentage of Biology Degrees Awarded By Gender’) plt.show()
+效果如图：图片来自：https://www.dataquest.io/m/147/improving-plot-aesthetics/4/visualizing-the-gender-gap
+##最大化data-ink比 data-ink比即数据量和图标构成的比例，比例越大，获取信息就越直观，如图所示：
+###Axes.tick_params方法可以去除轴上的标记
+plt.tick_params(bottom=”off”, top=”off”, left=”off”, right=”off”)  ###Spine.set_visible()方法可以去除图表的边框
+fig, ax = plt.subplots() ax.spines[“right”].set_visible(False) ax.spines[“left”].set_visible(False) ax.spines[“top”].set_visible(False) ax.spines[“bottom”].set_visible(False)  当然，这样写未免太过麻烦。shines是一个dict。print(ax.spines)结果如下：
+{‘right’: &amp;lt;matplotlib.spines.spine object=”” at=”” 0x111089c18=””&amp;gt;, ‘bottom’: &amp;lt;matplotlib.spines.spine object=”” at=”” 0x111060898=””&amp;gt;, ‘top’: &amp;lt;matplotlib.spines.spine object=”” at=”” 0x1110606a0=””&amp;gt;, ‘left’: &amp;lt;matplotlib.spines.spine object=”” at=”” 0x11107cd30=””&amp;gt;}&amp;lt;/matplotlib.spines.spine&amp;gt;&amp;lt;/matplotlib.spines.spine&amp;gt;&amp;lt;/matplotlib.spines.spine&amp;gt;&amp;lt;/matplotlib.spines.spine&amp;gt;  因此，可以用一个for循环来去除图表的四边
+for key,spine in ax.spines.items(): spine.set_visible(False)  ###subplot方法：绘制子图 subplot将整个绘图区域等分为numRows行* numCols列个子区域，然后按照从左到右，从上到下的顺序对每个子区域进行编号，左上的子区域的编号为1。如果numRows，numCols和plotNum这三个数都小于10的话，可以把它们缩写为一个整数，例如subplot(323)和subplot(3,2,3)是相同的。subplot在plotNum指定的区域中创建一个轴对象。如果新创建的轴和之前创建的轴重叠的话，之前的轴将被删除。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%961/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%961/</guid>
+      <description>###通过python实现数据可视化需要用到matplotlib库，它可以实现： &amp;gt;1. 用高级函数快速构图 &amp;gt;2. 全局地调整图 &amp;gt;3. 从头开始创建新的图表类型 ###使用matplotlib的画图步骤为： &amp;gt;1. 用数据构建图标 &amp;gt;2. 定制图表的外观 &amp;gt;3. 显示图表 &amp;gt;4. 编辑图表 &amp;gt;5. 重复上述步骤直至满意 ###matplotlib的pyplot模块提供了快速构建、调整常用图表的接口 通常将pyplot作为plt引入：
+import matplotlib.pyplot as plt  绘图和演示函数分别为：
+plt.plot() plt.show()  结果为一个空的图
+plot方法可以接受两个变量作为x轴和y轴，对象可以为任何可迭代（iterable）类型，如numpy.array和pandas.Series
+plt.plot(x_values, y_values)  当坐标轴的标记显得过于拥挤时，可以通过xticks或yticks方法旋转标记
+plt.xticks(rotation=90)  xlabel、ylabel和title方法接收一个字符串作为参数传入，将其作为x轴、y轴和图标的标签
+plt.xlabel(“x”) plt.ylabel(“y”) plt.title(“title”)  完成图的样子：
+图片来自：https://www.dataquest.io/m/142/line-charts/9/adding-axis-labels-and-a-title</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9B%9B%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%962/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9B%9B%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%962/</guid>
+      <description> 调整线条颜色和线宽 选择合适的颜色对于一份图表是很重要的。此外，为了照顾色盲色弱的小伙伴，颜色的选择就更关键了。同时，选择合适的线宽也是很重要的
+调整线条颜色 Color Blind 10 http://tableaufriction.blogspot.ro/2012/11/finally-you-can-use-tableau-data-colors.html 这个色板提供了十种对色盲友好的颜色 线条颜色的调整通过plot方法的c参数设置，c接受一个对应颜色的字符串或一个rgb值的元组。注意，此处的rgb值的范围是0-1，并非0-255，因此要使用255作为分母。
+cb_dark_blue = (0/255, 107/255, 164/255) ax.plot(x_values, y_values, c=cb_dark_blue)  调整线宽 线条宽度的调整通过plot方法的linewidth参数设置
+ax.plot(x_values, y_values, c=cb_dark_blue， linewidth=3)  </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/tensorflow%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/tensorflow%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</guid>
+      <description>该笔记使用斯坦福的tensorflow课程CS20SI作为教程，可以在https://web.stanford.edu/class/cs20si/syllabus.html获得相关资源
+为什么要学习tensorflow 因为tensorflow是目前最流行的开源深度学习框架，由google开发，跨平台且具有良好的可移植性。 当然是因为用的人多，资料好找，例子大把大把的。国外都不流行的框架，国内想耍肯定不容易。此外，使用python的api也是原因之一，毕竟好上手嘛。
+安装并使用tensorflow 安装教程： https://www.tensorflow.org/install/
+跟着官方的说明走走就是了，但如果要安装gpu版的，有些地方就要注意了。
+http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#system-requirements 参考这个网址，建议选择其中的发行版，跟着教程安装cuda和cudnn（我就因为linux本身的问题导致opengl出了问题，不过貌似没啥影响）。
+安装成功后，打开终端的python命令行，如果下面这行代码不报错，差不多就成功了。
+import tensorflow as tf  如果有问题就慢慢查资料吧~
+基本概念： 张量（tensor） 张量（tensor）是一个n维的数组
+ 0维的tensor是一个标量（scalar） 1维的tensor是一个向量（vector） 2维的tensor是一个矩阵（matrix）  基本概念： 图（Graph）和会话（Session） 图（Graph）是计算过程的组合，会话（Session）则用于启动Graph。
+一个简单的graph：
+a = tf.add(1, 2)  这行代码会让tensorflow自动将x,y分别赋值为1,2。至于为什么是x和y？当没有手动指定时，默认就是这样。 要注意的是，a的值不是3，要得到3，需要使用session。
+a = tf.add(1, 2) sess = tf.Session() print(sess.run(a)) sess.close()  也有另一种写法：
+a = tf.add(1, 2) with tf.Session() as sess: print(sess.run(a))  每个graph都包含数个节点（nodes），这些node有多种类型 - 常量（constant） - 变量（variable） - 运算符（operator） - 占位符（placeholder）
+而连接node之间的线（edges），则在nodes之间传递tensor
+来看一个大点的graph：
+x = 2 y = 3 add_op = tf.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/ubuntuwin10%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%8A%98%E8%85%BE%E5%AE%9E%E5%BD%95/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/ubuntuwin10%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%8A%98%E8%85%BE%E5%AE%9E%E5%BD%95/</guid>
+      <description> 在纠结了很久的发行版选择后，最终还是选择了ubuntu16.04LTS。可能人老了就是这样吧。但再怎么说ubuntu也是linux，还是不得不折腾的。。。
+折腾的东西很多很杂，以后可能忘了，所以记录一下。
+第一步：安装ubuntu  下载ubuntu镜像，我这里下载不知为何10+mb/s，而且是官网 准备一个2g以上的u盘，安装好ultraiso 写入磁盘映像 在win下预留空间。打开磁盘管理，压缩卷。这里我压出了100G。 重启，进bios改引导。这里要看一看bios，把安全启动（secure boot）和快速启动都关掉，csm模块全部改成uefi优先。 开始安装，安装程序检测到了linux，但是这里不要选共存，选“其他选项”，手动分区 我的打算是70个g给linux，剩下30g使用exfat，这样两个系统都能操作。于是，直接把70个g挂载到根分区上（简单粗暴）。这里注意启动项要选在win10的efi分区上。 密码、时区之类的设置，然后就是等待了  第二步：更新系统（可以先修改软件源） sudo apt-get update sudo apt-get upgrade sudo apt-get dist-upgrade  第三步：检测并安装驱动 打开软件与更新&amp;ndash;&amp;gt;附加驱动
+第四步：基本的美化 安装tweak-tool
+sudo apt-get install unity-tweak-tool  做自己喜欢的调整，主题我用了arc，图标是numix-circle
+第五步：安装显卡驱动 我这张卡是amd rx480,在官网找到驱动下载即可，按提示安装即可。
+如果要卸载：
+sudo amdgpu-pro-uninstall  第六步：安装chrome、teamviewer、ss-qt 网上教材很多，故不赘述
+第七步：关闭在线搜索和错误信息发送 </description>
+    </item>
+    
+  </channel>
+</rss>

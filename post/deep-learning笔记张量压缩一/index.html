@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title> - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="hgt" />
+  <meta name="description" content="参考Github项目：https://github.com/timgaripov/TensorNet-TF 参考论文链接：http://arxiv.org/abs/1509.06569
+在一个复杂的大型神经网络中，权重(Weights)的保存需要占用相当大的空间，尤其是在全连接层(FC-layers)部分。张量压缩是以张量(tensor)的形式保存权重矩阵的技术，能够在具有较高压缩率的情况下保持模型的准确率，从而得到一个轻量的模型。
+张量 张量(计算机领域的张量)即使不同维度的数组(array)，一维的张量就是向量(vector)，二维的张量即是矩阵(matrix)。 TT-format TT-format是文中提出的一种表示张量的方法。一个大张量可以表示为数个小张量的组合，就能大幅减小了需要储存的参数量。在深度神经网络的全连接层中，有许多参数是稀疏的(＝/≈0)、冗余的，如果能寻找到一个张量的低秩(rank)表示，就能将一个累乘的量转变成较小的量的累加。如上图所示，一个四维的张量(3*4*4*3)，被分解成了四个三维的张量(称为Core)，这个张量在(2,4,2,3)处的值就可以通过四个core中对应的矩阵相乘来得到。 在这个例子中，张量本身的参数量是3*4*4*3=144，而用TT-format进行表示只需要3*3&#43;3*3*4&#43;3*3*4&#43;3*3=90个参数，这个例子的秩为3，如果能得到更低的秩，就可以得到更高的压缩率。
+除此之外，TT-format还可以用来表示矩阵和向量，并支持进行按位乘法、加法。
+TT-layer 在神经网络的全连接层中，前向传播需要计算y=Wx&#43;b，反向传播则需要计算dW和db。
+通过将y,x,W,b分别以张量的形式表示，再转化成TT-format进行运算，既能节省内存，也能节省时间。同样，反向传播过程也能通过这种方法节约计算资源。
+计算量对比：" />
+
+  <meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/deep-learning%E7%AC%94%E8%AE%B0%E5%BC%A0%E9%87%8F%E5%8E%8B%E7%BC%A9%E4%B8%80/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" href="/favicon.ico" />
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+<link href="/dist/even.min.css?v=2.6.6" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+<meta property="og:title" content="" />
+<meta property="og:description" content="参考Github项目：https://github.com/timgaripov/TensorNet-TF 参考论文链接：http://arxiv.org/abs/1509.06569
+在一个复杂的大型神经网络中，权重(Weights)的保存需要占用相当大的空间，尤其是在全连接层(FC-layers)部分。张量压缩是以张量(tensor)的形式保存权重矩阵的技术，能够在具有较高压缩率的情况下保持模型的准确率，从而得到一个轻量的模型。
+张量 张量(计算机领域的张量)即使不同维度的数组(array)，一维的张量就是向量(vector)，二维的张量即是矩阵(matrix)。 TT-format TT-format是文中提出的一种表示张量的方法。一个大张量可以表示为数个小张量的组合，就能大幅减小了需要储存的参数量。在深度神经网络的全连接层中，有许多参数是稀疏的(＝/≈0)、冗余的，如果能寻找到一个张量的低秩(rank)表示，就能将一个累乘的量转变成较小的量的累加。如上图所示，一个四维的张量(3*4*4*3)，被分解成了四个三维的张量(称为Core)，这个张量在(2,4,2,3)处的值就可以通过四个core中对应的矩阵相乘来得到。 在这个例子中，张量本身的参数量是3*4*4*3=144，而用TT-format进行表示只需要3*3&#43;3*3*4&#43;3*3*4&#43;3*3=90个参数，这个例子的秩为3，如果能得到更低的秩，就可以得到更高的压缩率。
+除此之外，TT-format还可以用来表示矩阵和向量，并支持进行按位乘法、加法。
+TT-layer 在神经网络的全连接层中，前向传播需要计算y=Wx&#43;b，反向传播则需要计算dW和db。
+通过将y,x,W,b分别以张量的形式表示，再转化成TT-format进行运算，既能节省内存，也能节省时间。同样，反向传播过程也能通过这种方法节约计算资源。
+计算量对比：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/deep-learning%E7%AC%94%E8%AE%B0%E5%BC%A0%E9%87%8F%E5%8E%8B%E7%BC%A9%E4%B8%80/" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="">
+<meta itemprop="description" content="参考Github项目：https://github.com/timgaripov/TensorNet-TF 参考论文链接：http://arxiv.org/abs/1509.06569
+在一个复杂的大型神经网络中，权重(Weights)的保存需要占用相当大的空间，尤其是在全连接层(FC-layers)部分。张量压缩是以张量(tensor)的形式保存权重矩阵的技术，能够在具有较高压缩率的情况下保持模型的准确率，从而得到一个轻量的模型。
+张量 张量(计算机领域的张量)即使不同维度的数组(array)，一维的张量就是向量(vector)，二维的张量即是矩阵(matrix)。 TT-format TT-format是文中提出的一种表示张量的方法。一个大张量可以表示为数个小张量的组合，就能大幅减小了需要储存的参数量。在深度神经网络的全连接层中，有许多参数是稀疏的(＝/≈0)、冗余的，如果能寻找到一个张量的低秩(rank)表示，就能将一个累乘的量转变成较小的量的累加。如上图所示，一个四维的张量(3*4*4*3)，被分解成了四个三维的张量(称为Core)，这个张量在(2,4,2,3)处的值就可以通过四个core中对应的矩阵相乘来得到。 在这个例子中，张量本身的参数量是3*4*4*3=144，而用TT-format进行表示只需要3*3&#43;3*3*4&#43;3*3*4&#43;3*3=90个参数，这个例子的秩为3，如果能得到更低的秩，就可以得到更高的压缩率。
+除此之外，TT-format还可以用来表示矩阵和向量，并支持进行按位乘法、加法。
+TT-layer 在神经网络的全连接层中，前向传播需要计算y=Wx&#43;b，反向传播则需要计算dW和db。
+通过将y,x,W,b分别以张量的形式表示，再转化成TT-format进行运算，既能节省内存，也能节省时间。同样，反向传播过程也能通过这种方法节约计算资源。
+计算量对比：">
+
+
+
+<meta itemprop="wordCount" content="13">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="参考Github项目：https://github.com/timgaripov/TensorNet-TF 参考论文链接：http://arxiv.org/abs/1509.06569
+在一个复杂的大型神经网络中，权重(Weights)的保存需要占用相当大的空间，尤其是在全连接层(FC-layers)部分。张量压缩是以张量(tensor)的形式保存权重矩阵的技术，能够在具有较高压缩率的情况下保持模型的准确率，从而得到一个轻量的模型。
+张量 张量(计算机领域的张量)即使不同维度的数组(array)，一维的张量就是向量(vector)，二维的张量即是矩阵(matrix)。 TT-format TT-format是文中提出的一种表示张量的方法。一个大张量可以表示为数个小张量的组合，就能大幅减小了需要储存的参数量。在深度神经网络的全连接层中，有许多参数是稀疏的(＝/≈0)、冗余的，如果能寻找到一个张量的低秩(rank)表示，就能将一个累乘的量转变成较小的量的累加。如上图所示，一个四维的张量(3*4*4*3)，被分解成了四个三维的张量(称为Core)，这个张量在(2,4,2,3)处的值就可以通过四个core中对应的矩阵相乘来得到。 在这个例子中，张量本身的参数量是3*4*4*3=144，而用TT-format进行表示只需要3*3&#43;3*3*4&#43;3*3*4&#43;3*3=90个参数，这个例子的秩为3，如果能得到更低的秩，就可以得到更高的压缩率。
+除此之外，TT-format还可以用来表示矩阵和向量，并支持进行按位乘法、加法。
+TT-layer 在神经网络的全连接层中，前向传播需要计算y=Wx&#43;b，反向传播则需要计算dW和db。
+通过将y,x,W,b分别以张量的形式表示，再转化成TT-format进行运算，既能节省内存，也能节省时间。同样，反向传播过程也能通过这种方法节约计算资源。
+计算量对比："/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Even</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title"></h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 0001-01-01 </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#张量">张量</a></li>
+<li><a href="#tt-format">TT-format</a></li>
+<li><a href="#tt-layer">TT-layer</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      
+
+<p>参考Github项目：<a href="https://github.com/timgaripov/TensorNet-TF">https://github.com/timgaripov/TensorNet-TF</a>
+参考论文链接：<a href="http://arxiv.org/abs/1509.06569">http://arxiv.org/abs/1509.06569</a></p>
+
+<p>在一个复杂的大型神经网络中，权重(Weights)的保存需要占用相当大的空间，尤其是在全连接层(FC-layers)部分。张量压缩是以张量(tensor)的形式保存权重矩阵的技术，能够在具有较高压缩率的情况下保持模型的准确率，从而得到一个轻量的模型。</p>
+
+<h4 id="张量">张量</h4>
+
+<p>张量(计算机领域的张量)即使不同维度的数组(array)，一维的张量就是向量(vector)，二维的张量即是矩阵(matrix)。
+<img src="http://upload-images.jianshu.io/upload_images/7522322-da5b160b7457c84d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" />
+<img src="http://upload-images.jianshu.io/upload_images/7522322-147a723e88fc46bf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" /></p>
+
+<h4 id="tt-format">TT-format</h4>
+
+<p>TT-format是文中提出的一种表示张量的方法。<img src="http://upload-images.jianshu.io/upload_images/7522322-6529c8bfadd35063.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" /></p>
+
+<p>一个大张量可以表示为数个小张量的组合，就能大幅减小了需要储存的参数量。在深度神经网络的全连接层中，有许多参数是稀疏的(＝/≈0)、冗余的，如果能寻找到一个张量的低秩(rank)表示，就能将一个累乘的量转变成较小的量的累加。<img src="http://upload-images.jianshu.io/upload_images/7522322-8e6d5b6f1d598fc0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" /></p>
+
+<p>如上图所示，一个四维的张量(3*4*4*3)，被分解成了四个三维的张量(称为Core)，这个张量在(2,4,2,3)处的值就可以通过四个core中对应的矩阵相乘来得到。
+在这个例子中，张量本身的参数量是3*4*4*3=144，而用TT-format进行表示只需要3*3+3*3*4+3*3*4+3*3=90个参数，这个例子的秩为3，如果能得到更低的秩，就可以得到更高的压缩率。</p>
+
+<p>除此之外，TT-format还可以用来表示矩阵和向量，并支持进行按位乘法、加法。</p>
+
+<h4 id="tt-layer">TT-layer</h4>
+
+<p>在神经网络的全连接层中，前向传播需要计算y=Wx+b，反向传播则需要计算dW和db。</p>
+
+<p>通过将y,x,W,b分别以张量的形式表示，再转化成TT-format进行运算，既能节省内存，也能节省时间。同样，反向传播过程也能通过这种方法节约计算资源。</p>
+
+<p>计算量对比：</p>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/7522322-7f05fe0f97719337.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" /></p>
+
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">hgt</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">0001-01-01</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E4%B8%80%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/">
+            <span class="next-text nav-default"></span>
+            <span class="prev-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+
+  
+      </div>  
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy; 
+    2017
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">hgt</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.min.js?v=2.6.6"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+
+
+
+
+</body>
+</html>

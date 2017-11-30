@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title> - Even - A super concise theme for Hugo</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="hgt" />
+  <meta name="description" content="Django的ORM框架相当强大，只需要在每个app的models.py文件中创建Class即可，每个字段就是一个类的属性
+示例： from django.db import models from django.contrib.auth.models import AbstractUser # 用户信息模型 class UserProfile(AbstractUser): mobile = models.CharField(verbose_name=u&amp;quot;手机号码&amp;quot;, max_length=20, null=True, blank=True) gender = models.CharField( verbose_name=u&amp;quot;性别&amp;quot;, choices=((&amp;quot;male&amp;quot;, u&amp;quot;男&amp;quot;), (&amp;quot;female&amp;quot;, u&amp;quot;女&amp;quot;)), default=&amp;quot;male&amp;quot;, max_length=6) real_name = models.CharField(verbose_name=u&amp;quot;真实姓名&amp;quot;, max_length=50, null=True, blank=True) city = models.CharField(verbose_name=u&amp;quot;城市&amp;quot;, max_length=20, null=True, blank=True) introduction = models.TextField(verbose_name=u&amp;quot;个人介绍&amp;quot;, null=True, blank=True) class Meta: verbose_name = u&amp;quot;用户信息&amp;quot; verbose_name_plural = verbose_name def __unicode__(self): return self.username  modes.py中的类需要继承django.db中的models.Model，这个例子中继承了AbstractUser，这是django中用户类的原型，因为我要使用自己的用户模型，所以继承了它。在默认的用户模型中已经有了用户名、密码及邮箱，所以这里并没有设置。
+数据库中的数据类型在django中表现为不同的Field，常用的有CharField、TextField、FileField等。
+Fields共有的属性 这些Field共有的属性有null、blank、unique等，当然大部分Field还可以设置为主键（只能设置一个）
+null属性设置为True时，数据库中表现为字段可以为空；而blank设置为True时即表示这个属性在实例化类时必须进行赋值。
+unique属性：顾名思义，设置为True后该字段不能重复
+有时候需要通过多个字段判断唯一性，可以在Meta中设置：
+unique_together = (&amp;quot;value_1&amp;quot;, &amp;quot;value_2&amp;quot;)  primary_key属性，主键，不设置也可以，不设置的话会自动生成自增的字段id" />
+
+  <meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E4%BA%8Corm/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" href="/favicon.ico" />
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+<link href="/dist/even.min.css?v=2.6.6" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+<meta property="og:title" content="" />
+<meta property="og:description" content="Django的ORM框架相当强大，只需要在每个app的models.py文件中创建Class即可，每个字段就是一个类的属性
+示例： from django.db import models from django.contrib.auth.models import AbstractUser # 用户信息模型 class UserProfile(AbstractUser): mobile = models.CharField(verbose_name=u&quot;手机号码&quot;, max_length=20, null=True, blank=True) gender = models.CharField( verbose_name=u&quot;性别&quot;, choices=((&quot;male&quot;, u&quot;男&quot;), (&quot;female&quot;, u&quot;女&quot;)), default=&quot;male&quot;, max_length=6) real_name = models.CharField(verbose_name=u&quot;真实姓名&quot;, max_length=50, null=True, blank=True) city = models.CharField(verbose_name=u&quot;城市&quot;, max_length=20, null=True, blank=True) introduction = models.TextField(verbose_name=u&quot;个人介绍&quot;, null=True, blank=True) class Meta: verbose_name = u&quot;用户信息&quot; verbose_name_plural = verbose_name def __unicode__(self): return self.username  modes.py中的类需要继承django.db中的models.Model，这个例子中继承了AbstractUser，这是django中用户类的原型，因为我要使用自己的用户模型，所以继承了它。在默认的用户模型中已经有了用户名、密码及邮箱，所以这里并没有设置。
+数据库中的数据类型在django中表现为不同的Field，常用的有CharField、TextField、FileField等。
+Fields共有的属性 这些Field共有的属性有null、blank、unique等，当然大部分Field还可以设置为主键（只能设置一个）
+null属性设置为True时，数据库中表现为字段可以为空；而blank设置为True时即表示这个属性在实例化类时必须进行赋值。
+unique属性：顾名思义，设置为True后该字段不能重复
+有时候需要通过多个字段判断唯一性，可以在Meta中设置：
+unique_together = (&quot;value_1&quot;, &quot;value_2&quot;)  primary_key属性，主键，不设置也可以，不设置的话会自动生成自增的字段id" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E4%BA%8Corm/" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="">
+<meta itemprop="description" content="Django的ORM框架相当强大，只需要在每个app的models.py文件中创建Class即可，每个字段就是一个类的属性
+示例： from django.db import models from django.contrib.auth.models import AbstractUser # 用户信息模型 class UserProfile(AbstractUser): mobile = models.CharField(verbose_name=u&quot;手机号码&quot;, max_length=20, null=True, blank=True) gender = models.CharField( verbose_name=u&quot;性别&quot;, choices=((&quot;male&quot;, u&quot;男&quot;), (&quot;female&quot;, u&quot;女&quot;)), default=&quot;male&quot;, max_length=6) real_name = models.CharField(verbose_name=u&quot;真实姓名&quot;, max_length=50, null=True, blank=True) city = models.CharField(verbose_name=u&quot;城市&quot;, max_length=20, null=True, blank=True) introduction = models.TextField(verbose_name=u&quot;个人介绍&quot;, null=True, blank=True) class Meta: verbose_name = u&quot;用户信息&quot; verbose_name_plural = verbose_name def __unicode__(self): return self.username  modes.py中的类需要继承django.db中的models.Model，这个例子中继承了AbstractUser，这是django中用户类的原型，因为我要使用自己的用户模型，所以继承了它。在默认的用户模型中已经有了用户名、密码及邮箱，所以这里并没有设置。
+数据库中的数据类型在django中表现为不同的Field，常用的有CharField、TextField、FileField等。
+Fields共有的属性 这些Field共有的属性有null、blank、unique等，当然大部分Field还可以设置为主键（只能设置一个）
+null属性设置为True时，数据库中表现为字段可以为空；而blank设置为True时即表示这个属性在实例化类时必须进行赋值。
+unique属性：顾名思义，设置为True后该字段不能重复
+有时候需要通过多个字段判断唯一性，可以在Meta中设置：
+unique_together = (&quot;value_1&quot;, &quot;value_2&quot;)  primary_key属性，主键，不设置也可以，不设置的话会自动生成自增的字段id">
+
+
+
+<meta itemprop="wordCount" content="142">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="Django的ORM框架相当强大，只需要在每个app的models.py文件中创建Class即可，每个字段就是一个类的属性
+示例： from django.db import models from django.contrib.auth.models import AbstractUser # 用户信息模型 class UserProfile(AbstractUser): mobile = models.CharField(verbose_name=u&quot;手机号码&quot;, max_length=20, null=True, blank=True) gender = models.CharField( verbose_name=u&quot;性别&quot;, choices=((&quot;male&quot;, u&quot;男&quot;), (&quot;female&quot;, u&quot;女&quot;)), default=&quot;male&quot;, max_length=6) real_name = models.CharField(verbose_name=u&quot;真实姓名&quot;, max_length=50, null=True, blank=True) city = models.CharField(verbose_name=u&quot;城市&quot;, max_length=20, null=True, blank=True) introduction = models.TextField(verbose_name=u&quot;个人介绍&quot;, null=True, blank=True) class Meta: verbose_name = u&quot;用户信息&quot; verbose_name_plural = verbose_name def __unicode__(self): return self.username  modes.py中的类需要继承django.db中的models.Model，这个例子中继承了AbstractUser，这是django中用户类的原型，因为我要使用自己的用户模型，所以继承了它。在默认的用户模型中已经有了用户名、密码及邮箱，所以这里并没有设置。
+数据库中的数据类型在django中表现为不同的Field，常用的有CharField、TextField、FileField等。
+Fields共有的属性 这些Field共有的属性有null、blank、unique等，当然大部分Field还可以设置为主键（只能设置一个）
+null属性设置为True时，数据库中表现为字段可以为空；而blank设置为True时即表示这个属性在实例化类时必须进行赋值。
+unique属性：顾名思义，设置为True后该字段不能重复
+有时候需要通过多个字段判断唯一性，可以在Meta中设置：
+unique_together = (&quot;value_1&quot;, &quot;value_2&quot;)  primary_key属性，主键，不设置也可以，不设置的话会自动生成自增的字段id"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Even</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Even</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title"></h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 0001-01-01 </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#示例">示例：</a></li>
+<li><a href="#fields共有的属性">Fields共有的属性</a></li>
+<li><a href="#meta">Meta</a></li>
+<li><a href="#charfield">CharField</a></li>
+<li><a href="#filefield-imagefield">FileField &amp; ImageField</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      
+
+<p>Django的ORM框架相当强大，只需要在每个app的models.py文件中创建Class即可，每个字段就是一个类的属性</p>
+
+<h4 id="示例">示例：</h4>
+
+<pre><code class="language-python">from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+
+# 用户信息模型
+class UserProfile(AbstractUser):
+    mobile = models.CharField(verbose_name=u&quot;手机号码&quot;, max_length=20, null=True, blank=True)
+    gender = models.CharField(
+        verbose_name=u&quot;性别&quot;, choices=((&quot;male&quot;, u&quot;男&quot;), (&quot;female&quot;, u&quot;女&quot;)), default=&quot;male&quot;, max_length=6)
+    real_name = models.CharField(verbose_name=u&quot;真实姓名&quot;, max_length=50, null=True, blank=True)
+    city = models.CharField(verbose_name=u&quot;城市&quot;, max_length=20, null=True, blank=True)
+    introduction = models.TextField(verbose_name=u&quot;个人介绍&quot;, null=True, blank=True)
+
+    class Meta:
+        verbose_name = u&quot;用户信息&quot;
+        verbose_name_plural = verbose_name
+
+    def __unicode__(self):
+        return self.username
+</code></pre>
+
+<p>modes.py中的类需要继承django.db中的models.Model，这个例子中继承了AbstractUser，这是django中用户类的原型，因为我要使用自己的用户模型，所以继承了它。在默认的用户模型中已经有了用户名、密码及邮箱，所以这里并没有设置。</p>
+
+<p>数据库中的数据类型在django中表现为不同的Field，常用的有CharField、TextField、FileField等。</p>
+
+<h4 id="fields共有的属性">Fields共有的属性</h4>
+
+<p>这些Field共有的属性有null、blank、unique等，当然大部分Field还可以设置为主键（只能设置一个）</p>
+
+<p>null属性设置为True时，数据库中表现为字段可以为空；而blank设置为True时即表示这个属性在实例化类时必须进行赋值。</p>
+
+<p>unique属性：顾名思义，设置为True后该字段不能重复</p>
+
+<p>有时候需要通过多个字段判断唯一性，可以在Meta中设置：</p>
+
+<pre><code class="language-python">unique_together = (&quot;value_1&quot;, &quot;value_2&quot;)
+</code></pre>
+
+<p>primary_key属性，主键，不设置也可以，不设置的话会自动生成自增的字段id</p>
+
+<p>verbose_name，字段的别名，这个是在后台显示的</p>
+
+<h4 id="meta">Meta</h4>
+
+<p>Meta中设置这个数据表的属性，verbose_name表的别名，verbose_name_plural表的别名的复数形式。</p>
+
+<p>当然如果你不希望在后台看到“用户信息s”这种神奇的东西的话，就将上述两个属性设置成一样即可：</p>
+
+<pre><code class="language-python">    class Meta:
+        verbose_name = u&quot;个人信息&quot;
+        verbose_name_plural = verbose_name
+</code></pre>
+
+<p><strong>unicode</strong>（python3中使用<strong>str</strong>）方法，设置实例的别名</p>
+
+<h4 id="charfield">CharField</h4>
+
+<p>CharField即对应mysql中的varchar，在这个Field中，max_length是必须设置的。</p>
+
+<h4 id="filefield-imagefield">FileField &amp; ImageField</h4>
+
+<p>这俩差不多是一样的，但是ImageField会验证文件类型是否为有效的图片。此外，ImageField中，必须设置max_length，而FileField中max_length有默认值100。在数据库中，并不存放文件本身，而是存放着文件的相对路径。</p>
+
+<p>因此，通常都会设置upload_to属性，即上传的文件保存在哪，文件将会被保存在设置的MEDIA_ROOT中，如：</p>
+
+<pre><code>upload_to='user/'
+</code></pre>
+
+<p>当然也可以使用自定义的动态的上传方法</p>
+
+<pre><code class="language-python">def upload_for_file(instance, filename):
+    return '/'.join(['233', '666', user.username, filename])
+
+
+file = models.FileField(null=True, blank=True, upload_to=upload_for_file)
+</code></pre>
+
+<p>通常，修改文件并不会删除原先的文件，可以在修改操作时先进行删除</p>
+
+<pre><code>user.file.delete(save=False)
+</code></pre>
+
+<p>当然这样做很麻烦，也不便维护，所以我们可以重载Class中的save方法：</p>
+
+<pre><code class="language-python">    def save(self, *args, **kwargs):
+        # delete old file when replacing by updating the file
+        try:
+            this = AttendedPerson.objects.get(id=self.id)
+            if this.file != self.file:
+                this.file.delete(save=False)
+        except Exception as e:
+            pass
+        super(AttendedPerson, self).save(*args, **kwargs)
+</code></pre>
+
+<p>此外，还有要注意的一点就是：删除实例（数据库中的一行）时，并不会删除文件。</p>
+
+<p>我选择手动删除orz</p>
+
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">hgt</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">0001-01-01</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E4%B8%89%E9%83%A8%E7%BD%B2%E4%B8%8A%E7%BA%BF/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default"></span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        
+          <a class="next" href="/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E5%9B%9B%E7%BD%91%E7%AB%99%E4%BC%98%E5%8C%96/">
+            <span class="next-text nav-default"></span>
+            <span class="prev-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+
+  
+      </div>  
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy; 
+    2017
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">hgt</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.min.js?v=2.6.6"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+
+
+
+
+</body>
+</html>
