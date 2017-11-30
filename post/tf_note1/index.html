@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>tensorflow学习笔记（一） - Hgt的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Hgt" />
+  <meta name="description" content="该笔记使用斯坦福的tensorflow课程CS20SI作为教程，可以在https://web.stanford.edu/class/cs20" />
+
+  <meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+<link rel="canonical" href="https://hgt312.github.io/post/tf_note1/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" href="/favicon.ico" />
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+<link href="/dist/even.min.css?v=2.6.6" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+<meta property="og:title" content="tensorflow学习笔记（一）" />
+<meta property="og:description" content="该笔记使用斯坦福的tensorflow课程CS20SI作为教程，可以在https://web.stanford.edu/class/cs20" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hgt312.github.io/post/tf_note1/" />
+
+
+
+<meta property="article:published_time" content="2017-08-22T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2017-08-22T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="tensorflow学习笔记（一）">
+<meta itemprop="description" content="该笔记使用斯坦福的tensorflow课程CS20SI作为教程，可以在https://web.stanford.edu/class/cs20">
+
+
+<meta itemprop="datePublished" content="2017-08-22T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-08-22T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="937">
+
+
+
+<meta itemprop="keywords" content="python,tensorflow,deep learning," />
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="tensorflow学习笔记（一）"/>
+<meta name="twitter:description" content="该笔记使用斯坦福的tensorflow课程CS20SI作为教程，可以在https://web.stanford.edu/class/cs20"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Hgt&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Hgt&#39;s Blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">tensorflow学习笔记（一）</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2017-08-22 </span>
+        <div class="post-category">
+            
+              <a href="/categories/tensorflow/"> tensorflow </a>
+            
+          </div>
+        <span class="more-meta"> 约 937 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#为什么要学习tensorflow">为什么要学习tensorflow</a>
+<ul>
+<li><a href="#安装并使用tensorflow">安装并使用tensorflow</a></li>
+<li><a href="#基本概念-张量-tensor">基本概念： 张量（tensor）</a></li>
+<li><a href="#基本概念-图-graph-和会话-session">基本概念： 图（Graph）和会话（Session）</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      
+
+<p><em>该笔记使用斯坦福的tensorflow课程<a href="https://web.stanford.edu/class/cs20si/">CS20SI</a>作为教程，可以在<a href="https://web.stanford.edu/class/cs20si/syllabus.html">https://web.stanford.edu/class/cs20si/syllabus.html</a>获得相关资源</em></p>
+
+<h2 id="为什么要学习tensorflow">为什么要学习tensorflow</h2>
+
+<p><del>因为tensorflow是目前最流行的开源深度学习框架，由google开发，跨平台且具有良好的可移植性。</del> 当然是因为用的人多，资料好找，例子大把大把的。国外都不流行的框架，国内想耍肯定不容易。此外，使用python的api也是原因之一，毕竟好上手嘛。</p>
+
+<h3 id="安装并使用tensorflow">安装并使用tensorflow</h3>
+
+<p>安装教程： <a href="https://www.tensorflow.org/install/">https://www.tensorflow.org/install/</a></p>
+
+<p>跟着官方的说明走走就是了，但如果要安装gpu版的，有些地方就要注意了。</p>
+
+<p><a href="http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#system-requirements">http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#system-requirements</a>
+参考这个网址，建议选择其中的发行版，跟着教程安装cuda和cudnn（我就因为linux本身的问题导致opengl出了问题，不过貌似没啥影响）。</p>
+
+<p>安装成功后，打开终端的python命令行，如果下面这行代码不报错，差不多就成功了。</p>
+
+<pre><code class="language-python">import tensorflow as tf
+</code></pre>
+
+<p>如果有问题就慢慢查资料吧~</p>
+
+<h3 id="基本概念-张量-tensor">基本概念： 张量（tensor）</h3>
+
+<p>张量（tensor）是一个n维的数组</p>
+
+<ul>
+<li>0维的tensor是一个标量（scalar）</li>
+<li>1维的tensor是一个向量（vector）</li>
+<li>2维的tensor是一个矩阵（matrix）</li>
+</ul>
+
+<h3 id="基本概念-图-graph-和会话-session">基本概念： 图（Graph）和会话（Session）</h3>
+
+<p>图（Graph）是计算过程的组合，会话（Session）则用于启动Graph。</p>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/7522322-3eeff8250d49c05d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="一个graph的例子" /></p>
+
+<p>一个简单的graph：</p>
+
+<pre><code class="language-python">a = tf.add(1, 2)
+</code></pre>
+
+<p>这行代码会让tensorflow自动将x,y分别赋值为1,2。至于为什么是x和y？当没有手动指定时，默认就是这样。
+要注意的是，a的值不是3，要得到3，需要使用session。</p>
+
+<pre><code class="language-python">a = tf.add(1, 2)
+sess = tf.Session()
+print(sess.run(a))
+sess.close()
+</code></pre>
+
+<p>也有另一种写法：</p>
+
+<pre><code class="language-python">a = tf.add(1, 2)
+with tf.Session() as sess:
+    print(sess.run(a))
+</code></pre>
+
+<p>每个graph都包含数个节点（nodes），这些node有多种类型
+- 常量（constant）
+- 变量（variable）
+- 运算符（operator）
+- 占位符（placeholder）</p>
+
+<p>而连接node之间的线（edges），则在nodes之间传递tensor</p>
+
+<p>来看一个大点的graph：</p>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/7522322-756449db8a69e8af.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" /></p>
+
+<pre><code class="language-python">x = 2
+y = 3
+add_op = tf.add(x, y)
+multiply_op = tf.multiply(x, y)
+useless = tf.multiply(x, add_op)
+pow_op = tf.pow(op2, op1)
+with tf.Session() as sess:
+    sess.run(pow_op)
+</code></pre>
+
+<p>在这段代码中，useless这个运算符并不会被用到，session不会计算无用的值</p>
+
+<p>当然，在tensorflow中，一个完整的图可以被分成多块，由多个不同设备进行运算。</p>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/7522322-0e2a0698546ebdf8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" /></p>
+
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Hgt</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">2017-08-22</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/python/">python</a>
+          
+          <a href="/tags/tensorflow/">tensorflow</a>
+          
+          <a href="/tags/deep-learning/">deep learning</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/py_note4/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Django建站笔记（四）——网站优化</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        
+          <a class="next" href="/post/other_note1/">
+            <span class="next-text nav-default">ubuntu&amp;win10双系统折腾实录</span>
+            <span class="prev-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+
+  
+      </div>  
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:963542954@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/hgt312/" class="iconfont icon-github" title="github"></a>
+  <a href="https://hgt312.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy; 
+    2017
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Hgt</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.min.js?v=2.6.6"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+
+
+
+
+</body>
+</html>

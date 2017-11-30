@@ -137,7 +137,11 @@
     <h1 class="post-title"><a class="post-link" href="/post/dl_note1/">Deep learning笔记——张量压缩（一）</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2017-11-28 </span>
-      
+      <div class="post-category">
+          
+            <a href="/categories/deep-learning/"> deep learning </a>
+          
+        </div>
       <span class="more-meta"> 约 752 字 </span>
       <span class="more-meta"> 预计阅读 2 分钟 </span>
     </div>
@@ -156,68 +160,25 @@
     
       <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E4%B8%80%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/"></a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/py_note1/">Django建站笔记（一）——基本配置</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-      <span class="more-meta"> 约 110 字 </span>
-      <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Django: The web framework for perfectionists with deadlines. django是python最流行的框架之一，特点是大而全，自带模板系统、优秀的ORM框架，还有完善的后台管理系统。
-这次建站为了使用xadmin，考虑到其兼容性，故选择了python2.7.13，Django1.9.13(这个版本在今年上半年已经不再支持了，建议大家使用1.11LTS)
-xadmin是国人开发的基于django的后台管理系统，用到了bootstrap，还有许多自带的插件（然而我没怎么研究），虽然不知道比官方的强在哪里，不过挺好用的就是了
-Django settings.py配置 settings.py是django项目的配置文件，很多重要的参数都要在这里设置
-DEBUG 在开发环境中，DEBUG应设置为TRUE，在404、500等页面会有详细的错误提示，同时会自动启动用于处理静态文件的中间件
-ALLOWED_HOSTS ALLOWED_HOSTS设置允许访问的ip，DEBUG = TRUE时不用管它，DEBUG = FALSE时必须配置，通常配置为&rsquo;*&lsquo;即可
-INSTALLED_APPS &amp; 根路径设置 INSTALLED_APPS是一个列表，收录所以需要加载的应用。在django项目中，我们自己创建的每个app自然都要加进去。
-通常，我们自建的app都放在根目录下，当项目很庞大时，app的数量就会很多。这是我们可以新建一个apps的package，将app们放进去，以便于目录结构的整洁。
-但这时有必要设置根路径了，下面这行代码就起了这样的作用
-sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))  AUTH_USER_MODEL &amp; AUTHENTICATION_BACKENDS django自带有认证系统，但默认的user表有时并不能满足我们的需求。登陆方法也是，默认的登陆后台只能通过用户名进行登陆。这是我们就会用到这两个参数了。
-AUTH_USER_MODEL = &quot;users.UserProfile&quot; AUTHENTICATION_BACKENDS = ( 'users.views.CustomBackend', )  TEMPLATES &amp; DATABASES django有自己默认的模板引擎，但也可以换成其他的，完全根据个人喜好。
-django中默认的数据库是sqlite3，同样可以选用其他数据库，也可以启用多个数据库。比如session的存储就能用到redis或mongodb。
-本地化设置 通常设置成这样即可：
-LANGUAGE_CODE = 'zh-hans' TIME_ZONE = 'Asia/Shanghai' USE_I18N = True USE_L10N = True USE_TZ = False  静态、媒体文件配置 STATIC_URL = '/static/' # STATICFILES_DIRS = ( # os.
-    </div>
-    <div class="read-more">
-      <a href="/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E4%B8%80%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    
-      <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E4%B8%89%E9%83%A8%E7%BD%B2%E4%B8%8A%E7%BA%BF/"></a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-      <span class="more-meta"> 约 240 字 </span>
+      <span class="post-time"> 2017-08-22 </span>
+      <div class="post-category">
+          
+            <a href="/categories/python/"> python </a>
+          
+        </div>
+      <span class="more-meta"> 约 947 字 </span>
       <span class="more-meta"> 预计阅读 2 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      因为我是用windows开发，这个部署上线真是相当折腾orz
-这里我采用了nginx+django+uwsgi的方式，系统选用了阿里云的ubuntu16.04，用到的工具有Xshell 5和Xftp 5
-第一步：安装nginx 当然是先更新系统了
-apt-get update  上面是错误做法orz
-sudo apt-get update  这才是正确的做法，因为我们最好不要在日常工作中使用root用户（但下面我会省去sudo 233）
-接下来就是安装nginx了
-apt-get install nginx  在ubuntu中，nginx的目录结构如下：
-配置文件：/etc/nginx下； 启动程序文件：/usr/sbin/nginx下； 日志文件：/var/log/nginx/下，分别是access.log和error.log； 此外，/etc/init.d自动生成了启动脚本nginx。  nginx的操作
-sudo /etc/init.d/nginx start # 启动 sudo /etc/init.d/nginx stop # 停止 sudo /etc/init.d/nginx restart # 重启 ps -ef | grep nginx # 查看进程  第二步：配置环境 首先安装virtualenv
-pip install virtualenv  然后创建一个虚拟环境
-virtualenv --no-site-packages web  接着，激活虚拟环境
-source web/bin/activate 退出时使用deactivate  接下来安装必要的package，然后直接copy几个我改过源码的包。
-通常直接拷贝在site-packages目录中就能用，前提是这个包依赖安装好，并且本身不需要编译。
+      Django: The web framework for perfectionists with deadlines. django是python最流行的框架之一，特点是大而全，自带模板系统、优秀的ORM框架，还有完善的后台管理系统。 这次建站为
     </div>
     <div class="read-more">
-      <a href="/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E4%B8%89%E9%83%A8%E7%BD%B2%E4%B8%8A%E7%BA%BF/" class="read-more-link">阅读更多</a>
+      <a href="/post/py_note1/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -225,28 +186,25 @@ source web/bin/activate 退出时使用deactivate  接下来安装必要的packa
     
       <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E4%BA%8Corm/"></a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/py_note3/">Django建站笔记（三）——部署上线</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-      <span class="more-meta"> 约 142 字 </span>
-      <span class="more-meta"> 预计阅读 1 分钟 </span>
+      <span class="post-time"> 2017-08-22 </span>
+      <div class="post-category">
+          
+            <a href="/categories/python/"> python </a>
+          
+        </div>
+      <span class="more-meta"> 约 912 字 </span>
+      <span class="more-meta"> 预计阅读 2 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      Django的ORM框架相当强大，只需要在每个app的models.py文件中创建Class即可，每个字段就是一个类的属性
-示例： from django.db import models from django.contrib.auth.models import AbstractUser # 用户信息模型 class UserProfile(AbstractUser): mobile = models.CharField(verbose_name=u&quot;手机号码&quot;, max_length=20, null=True, blank=True) gender = models.CharField( verbose_name=u&quot;性别&quot;, choices=((&quot;male&quot;, u&quot;男&quot;), (&quot;female&quot;, u&quot;女&quot;)), default=&quot;male&quot;, max_length=6) real_name = models.CharField(verbose_name=u&quot;真实姓名&quot;, max_length=50, null=True, blank=True) city = models.CharField(verbose_name=u&quot;城市&quot;, max_length=20, null=True, blank=True) introduction = models.TextField(verbose_name=u&quot;个人介绍&quot;, null=True, blank=True) class Meta: verbose_name = u&quot;用户信息&quot; verbose_name_plural = verbose_name def __unicode__(self): return self.username  modes.py中的类需要继承django.db中的models.Model，这个例子中继承了AbstractUser，这是django中用户类的原型，因为我要使用自己的用户模型，所以继承了它。在默认的用户模型中已经有了用户名、密码及邮箱，所以这里并没有设置。
-数据库中的数据类型在django中表现为不同的Field，常用的有CharField、TextField、FileField等。
-Fields共有的属性 这些Field共有的属性有null、blank、unique等，当然大部分Field还可以设置为主键（只能设置一个）
-null属性设置为True时，数据库中表现为字段可以为空；而blank设置为True时即表示这个属性在实例化类时必须进行赋值。
-unique属性：顾名思义，设置为True后该字段不能重复
-有时候需要通过多个字段判断唯一性，可以在Meta中设置：
-unique_together = (&quot;value_1&quot;, &quot;value_2&quot;)  primary_key属性，主键，不设置也可以，不设置的话会自动生成自增的字段id
+      因为我是用windows开发，这个部署上线真是相当折腾orz 这里我采用了nginx+django+uwsgi的方式，系统选用了阿里云的ubu
     </div>
     <div class="read-more">
-      <a href="/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E4%BA%8Corm/" class="read-more-link">阅读更多</a>
+      <a href="/post/py_note3/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -254,24 +212,25 @@ unique_together = (&quot;value_1&quot;, &quot;value_2&quot;)  primary_key属性�
     
       <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E5%9B%9B%E7%BD%91%E7%AB%99%E4%BC%98%E5%8C%96/"></a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/py_note2/">Django建站笔记（二）——ORM</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-      <span class="more-meta"> 约 20 字 </span>
-      <span class="more-meta"> 预计阅读 1 分钟 </span>
+      <span class="post-time"> 2017-08-22 </span>
+      <div class="post-category">
+          
+            <a href="/categories/python/"> python </a>
+          
+        </div>
+      <span class="more-meta"> 约 1427 字 </span>
+      <span class="more-meta"> 预计阅读 3 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      建站完成了，但访问网站时可能体验并不那么满意。
-事实上，除了网络连接，影响浏览体验的细节还有很多需要优化。这里推荐一个网站：https://developers.google.com/speed/pagespeed/insights/
-这个网站会分析网页的性能并给出建议（注意是网页，不是网站），它会列出已采用的优化措施和未采用的优化措施，这些优化措施包括。
- 启用压缩 按优先级排列可见内容 使用浏览器缓存 缩减 CSS 缩减 HTML 缩减 JavaScript 缩短服务器响应时间 避免使用着陆页重定向 清除首屏内容中阻止呈现的 JavaScript 和 CSS 优化图片  这里因为用的是nginx，所以启用压缩和设置浏览器缓存都相当简单。至于其他的内容，虽然繁琐，但也是很重要的，这就是考验前端功底的时候了~
+      Django的ORM框架相当强大，只需要在每个app的models.py文件中创建Class即可，每个字段就是一个类的属性 示例： from django.db import models from django.contrib.auth.models
     </div>
     <div class="read-more">
-      <a href="/post/django%E5%BB%BA%E7%AB%99%E7%AC%94%E8%AE%B0%E5%9B%9B%E7%BD%91%E7%AB%99%E4%BC%98%E5%8C%96/" class="read-more-link">阅读更多</a>
+      <a href="/post/py_note2/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -279,25 +238,51 @@ unique_together = (&quot;value_1&quot;, &quot;value_2&quot;)  primary_key属性�
     
       <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80numpy/"></a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/py_note4/">Django建站笔记（四）——网站优化</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-      <span class="more-meta"> 约 57 字 </span>
+      <span class="post-time"> 2017-08-22 </span>
+      <div class="post-category">
+          
+            <a href="/categories/python/"> python </a>
+          
+        </div>
+      <span class="more-meta"> 约 267 字 </span>
       <span class="more-meta"> 预计阅读 1 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      numpy文档链接：https://docs.scipy.org/doc/ ###numpy的核心数据结构：ndarray（n-dimension array，即多维数组） 示例：
-import numpy as np vector = np.array([5, 10, 15, 20]) matrix = np.array([[5, 10, 15], [20, 25, 30], [35, 40, 45]])  ###shape属性：获取矩阵的行数和列数
-print(vector.shape) &gt;&gt;&gt; (4,) print(matrix.shape) &gt;&gt;&gt; (2,3)  ###genfromtxt方法：从csv文件中读取数据 world_alcohol = np.genfromtxt(“world_alcohol.csv”,
-delimiter=”,”, dtype=”U75″) ###numpy中的数据类型有以下几种： &gt;1. bool，布尔类型，值为 True 或 False &gt;2. int，包含int16、int32 和 int64 &gt;3. float，包含float16、float32 和 float64 &gt;4. string，包含string 和 unicode
-利用dtype属性可以查看array的数据类型，array中的数据是相同的类型。array和python内置的list类型非常相似，这是二者非常不同的一点。
+      建站完成了，但访问网站时可能体验并不那么满意。 事实上，除了网络连接，影响浏览体验的细节还有很多需要优化。这里推荐一个网站：https://d
     </div>
     <div class="read-more">
-      <a href="/post/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80numpy/" class="read-more-link">阅读更多</a>
+      <a href="/post/py_note4/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    
+      <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/tf_note1/">tensorflow学习笔记（一）</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2017-08-22 </span>
+      <div class="post-category">
+          
+            <a href="/categories/tensorflow/"> tensorflow </a>
+          
+        </div>
+      <span class="more-meta"> 约 937 字 </span>
+      <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      该笔记使用斯坦福的tensorflow课程CS20SI作为教程，可以在https://web.stanford.edu/class/cs20
+    </div>
+    <div class="read-more">
+      <a href="/post/tf_note1/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
