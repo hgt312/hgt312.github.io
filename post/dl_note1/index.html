@@ -197,7 +197,9 @@
 
 <p>TT-format是文中提出的一种表示张量的方法。<img src="http://upload-images.jianshu.io/upload_images/7522322-6529c8bfadd35063.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" /></p>
 
-<p>一个大张量可以表示为数个小张量的组合，就能大幅减小了需要储存的参数量。在深度神经网络的全连接层中，有许多参数是稀疏的(＝/≈0)、冗余的，如果能寻找到一个张量的低秩(rank)表示，就能将一个累乘的量转变成较小的量的累加。<img src="http://upload-images.jianshu.io/upload_images/7522322-8e6d5b6f1d598fc0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" /></p>
+<p>一个大张量可以表示为数个小张量的组合，就能大幅减小了需要储存的参数量。在深度神经网络的全连接层中，有许多参数是稀疏的(＝/≈0)、冗余的，如果能寻找到一个张量的低秩(rank)表示，就能将一个累乘的量转变成较小的量的累加。</p>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/7522322-8e6d5b6f1d598fc0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="" /></p>
 
 <p>如上图所示，一个四维的张量(3*4*4*3)，被分解成了四个三维的张量(称为Core)，这个张量在(2,4,2,3)处的值就可以通过四个core中对应的矩阵相乘来得到。
 在这个例子中，张量本身的参数量是3*4*4*3=144，而用TT-format进行表示只需要3*3+3*3*4+3*3*4+3*3=90个参数，这个例子的秩为3，如果能得到更低的秩，就可以得到更高的压缩率。</p>
