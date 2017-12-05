@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Deep-learning笔记——神经网络的调试与优化（二） - Hgt的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Hgt" />
+  <meta name="description" content="神经网络的初始化 对几种初始化方法做个对比，发现其实初始化的选择还是很重要的。 全零初始化 全零初始化即将W和b中的元素全部设为0，这样会导致神经" />
+
+  <meta name="keywords" content="Hugo, theme, even, hgt" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+<link rel="canonical" href="https://hgt312.github.io/post/dl_note3/" />
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+<link href="/dist/even.min.css?v=2.6.6" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+<meta property="og:title" content="Deep-learning笔记——神经网络的调试与优化（二）" />
+<meta property="og:description" content="神经网络的初始化 对几种初始化方法做个对比，发现其实初始化的选择还是很重要的。 全零初始化 全零初始化即将W和b中的元素全部设为0，这样会导致神经" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hgt312.github.io/post/dl_note3/" />
+
+
+
+<meta property="article:published_time" content="2017-12-05T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2017-12-05T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Deep-learning笔记——神经网络的调试与优化（二）">
+<meta itemprop="description" content="神经网络的初始化 对几种初始化方法做个对比，发现其实初始化的选择还是很重要的。 全零初始化 全零初始化即将W和b中的元素全部设为0，这样会导致神经">
+
+
+<meta itemprop="datePublished" content="2017-12-05T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-12-05T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="842">
+
+
+
+<meta itemprop="keywords" content="deep learning," />
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Deep-learning笔记——神经网络的调试与优化（二）"/>
+<meta name="twitter:description" content="神经网络的初始化 对几种初始化方法做个对比，发现其实初始化的选择还是很重要的。 全零初始化 全零初始化即将W和b中的元素全部设为0，这样会导致神经"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110483918-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-110483918-1');
+</script>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Hgt&#39;s Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">Hgt&#39;s Blog</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Deep-learning笔记——神经网络的调试与优化（二）</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2017-12-05 </span>
+        <div class="post-category">
+            
+              <a href="/categories/deep-learning/"> deep learning </a>
+            
+          </div>
+        <span class="more-meta"> 约 842 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#神经网络的初始化">神经网络的初始化</a>
+<ul>
+<li><a href="#全零初始化">全零初始化</a></li>
+<li><a href="#随机初始化">随机初始化</a>
+<ul>
+<li><a href="#用较大的权重随机初始化">用较大的权重随机初始化</a></li>
+<li><a href="#he初始化">He初始化</a></li>
+</ul></li>
+<li><a href="#对比">对比</a></li>
+</ul></li>
+<li><a href="#输入归一化">输入归一化</a>
+<ul>
+<li><a href="#min-max标准化">min-max标准化</a></li>
+<li><a href="#z-score标准化">Z-score标准化</a></li>
+</ul></li>
+<li><a href="#参考">参考</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      
+
+<h2 id="神经网络的初始化">神经网络的初始化</h2>
+
+<p>对几种初始化方法做个对比，发现其实初始化的选择还是很重要的。</p>
+
+<h3 id="全零初始化">全零初始化</h3>
+
+<p>全零初始化即将W和b中的元素全部设为0，这样会导致神经网络的对称性，这样会得到一个性能很差的模型。</p>
+
+<p>一个极端的例子，在Coursera课程Improving Deep Neural Networks: Hyperparameter tuning, Regularization and Optimization第一周的课后作业的一个平面上的点的二分类问题中，全零初始化导致网络无法进行训练，loss永远保持不变。这是由于隐层使用了ReLU，通过简单的推导可知，W和b将会永远小于0，使得输出层的输入每次都全部为0，从而得到相同的结果。</p>
+
+<p><strong>如图所示</strong></p>
+
+<p><center><img src="data:image/png;base64,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" alt="" /></center></p>
+
+<h3 id="随机初始化">随机初始化</h3>
+
+<p>为了打破网络的对称性，就必须用到随机初始化。通常使用高斯（正态）随机处理W，b全零即可。但是随机处理时，尺度的大小也是要注意的。</p>
+
+<h4 id="用较大的权重随机初始化">用较大的权重随机初始化</h4>
+
+<pre><code class="language-python">np.random.randn() * 10
+</code></pre>
+
+<p>这样会导致初始的输出越界（超过float32的表示范围），如果没有做异常处理，就会导致程序报错。事实上，即便能够计算，也得不到一个好的结果。</p>
+
+<p>事实上，通常我们希望得到一个数值较小的W（上篇提到的正则化就是为了减小W），因此会用选用较小的W。</p>
+
+<h4 id="he初始化">He初始化</h4>
+
+<p>He初始化是一种适用于ReLU隐层的初始化方法。</p>
+
+<pre><code class="language-python">np.random.randn() * np.sqrt(2./n) # n为前一层的单元数
+</code></pre>
+
+<p>在tanh隐层则通常使用Xavier初始化，具体使用则是将上式中的2替换为1即可。</p>
+
+<h3 id="对比">对比</h3>
+
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Train accuracy</th>
+<th>Problem/Comment</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>3-layer NN with zeros initialization</td>
+<td>50%</td>
+<td>fails to break symmetry</td>
+</tr>
+
+<tr>
+<td>3-layer NN with large random initialization</td>
+<td>83%</td>
+<td>too large weights</td>
+</tr>
+
+<tr>
+<td>3-layer NN with He initialization</td>
+<td>99%</td>
+<td>recommended method</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="输入归一化">输入归一化</h2>
+
+<p>通常得到的数据有不同的量纲和单位，这会影响到模型的效果，因此需要做归一化处理。</p>
+
+<h3 id="min-max标准化">min-max标准化</h3>
+
+<p>即线性归一化。比如通常对图像数据做如下处理：</p>
+
+<pre><code class="language-python">x *= 1./255
+x -= 0.5
+x *= 2
+</code></pre>
+
+<p>这样，输入就都在[-1,1]中了</p>
+
+<h3 id="z-score标准化">Z-score标准化</h3>
+
+<p>这种方法使经过处理的数据符合标准正态分布，即均值为0，标准差为1。</p>
+
+<pre><code class="language-python">u = np.sum(x) / m # m为样本个数
+sigma = np.sqrt(np.sum(x**2) / m)
+x = (x - u) / sigma
+</code></pre>
+
+<p><strong>要注意的是，在模型验证阶段或使用模型时，不能再另外计算μ和σ，而要用归一化训练集时得到的值，这是因为必须对训练数据和测试数据做相同处理。</strong></p>
+
+<p>Z-score标准化可以使模型表现更好，训练更快。</p>
+
+<h2 id="参考">参考</h2>
+
+<p><em>Coursera课程Improving Deep Neural Networks: Hyperparameter tuning, Regularization and Optimization</em></p>
+
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Hgt</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">2017-12-05</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          
+          <a href="/tags/deep-learning/">deep learning</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/dl_note2/">
+            <span class="next-text nav-default">Deep-learning笔记——神经网络的调试与优化（一）</span>
+            <span class="prev-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+
+  
+      </div>  
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:963542954@qq.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/hgt312/" class="iconfont icon-github" title="github"></a>
+  <a href="https://hgt312.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy; 
+    2017
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Hgt</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+<script type="text/javascript" src="/dist/even.min.js?v=2.6.6"></script>
+
+
+
+
+</body>
+</html>
