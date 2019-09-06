@@ -89,6 +89,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#contribute">Contribute</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-write-config-generation-functions">Step 1, write config generation functions:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-write-benchmark-functions">Step 2, write benchmark functions:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-3-register-the-operator">Step 3, register the operator:</a></li>
 </ul>
 </li>
 </ul>
@@ -222,7 +225,57 @@
 <p><strong>Others:</strong> need test, doc-gen, logging.</p>
 <div class="section" id="contribute">
 <h3>Contribute<a class="headerlink" href="#contribute" title="Permalink to this headline">¶</a></h3>
-<p>For all the operator list can be obtained, the mainly work is to write config generation functions and corresponding benchmark functions for lots of types of operators.</p>
+<p>For all the operator list can be obtained, the mainly work is to write config generation functions and corresponding benchmark functions for lots of types of operators. After that, register the operator so that it can be seen in generated report.</p>
+</div>
+</div>
+<div class="section" id="step-1-write-config-generation-functions">
+<h2>Step 1, write config generation functions:<a class="headerlink" href="#step-1-write-config-generation-functions" title="Permalink to this headline">¶</a></h2>
+<p>A config is consist of parameter used to generate input tensor and other necessary arguments. A single config is a python dict, for example <code class="docutils literal notranslate"><span class="pre">{'shape':</span> <span class="pre">(10,</span> <span class="pre">20),</span> <span class="pre">'dtype':</span> <span class="pre">'float32'}</span></code>.</p>
+<p>The input of a config generation function is always <code class="docutils literal notranslate"><span class="pre">dtype</span></code>. To generate random configs, return a dict; to generate determined configs, return a list of dicts.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># random</span>
+<span class="k">def</span> <span class="nf">get_random_size_config</span><span class="p">(</span><span class="n">dtypes</span><span class="p">):</span>
+    <span class="n">config_space</span> <span class="o">=</span> <span class="n">random_size_cs</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">config_space</span><span class="o">.</span><span class="n">sample_configuration</span><span class="p">()</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;size&#39;</span><span class="p">),)</span>
+    <span class="c1"># random dtype</span>
+    <span class="n">config_space</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">ConfigurationSpace</span><span class="p">()</span>
+    <span class="n">config_space</span><span class="o">.</span><span class="n">add_hyperparameter</span><span class="p">(</span><span class="n">csh</span><span class="o">.</span><span class="n">CategoricalHyperparameter</span><span class="p">(</span><span class="s1">&#39;dtype&#39;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">dtypes</span><span class="p">))</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">config_space</span><span class="o">.</span><span class="n">sample_configuration</span><span class="p">()</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dtype&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="n">shape</span><span class="p">,</span> <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="n">dtype</span><span class="p">}</span>
+
+
+<span class="c1"># determined</span>
+<span class="k">def</span> <span class="nf">get_size_configs</span><span class="p">(</span><span class="n">dtypes</span><span class="p">):</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">dtypes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">configs</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">50</span><span class="p">,),</span> <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="n">dtype</span><span class="p">},</span>
+               <span class="p">{</span><span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">5000</span><span class="p">,),</span> <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="n">dtype</span><span class="p">},</span>
+               <span class="p">{</span><span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">50000</span><span class="p">,),</span> <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="n">dtype</span><span class="p">},</span>
+               <span class="p">{</span><span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">100000</span><span class="p">,),</span> <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="n">dtype</span><span class="p">},</span>
+               <span class="p">{</span><span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1000000</span><span class="p">,),</span> <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="n">dtype</span><span class="p">},</span>
+               <span class="p">{</span><span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">3000000</span><span class="p">,),</span> <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="n">dtype</span><span class="p">}]</span>
+    <span class="k">return</span> <span class="n">configs</span>
+</pre></div>
+</div>
+<p><em>P.S.: There are some basic config spaces that can be useful for writing config functions.</em></p>
+</div>
+<div class="section" id="step-2-write-benchmark-functions">
+<h2>Step 2, write benchmark functions:<a class="headerlink" href="#step-2-write-benchmark-functions" title="Permalink to this headline">¶</a></h2>
+<p>A benchmark function defines how to test the performance of a specific operator, its implementation is related to the config corresponding to the operator.</p>
+<p>Handle different part of config by different methods: handle tensors by a python list, then handle other arguments by a python dict. A general benchmark function which can handle all configs with tensors with same shape and dtype is completed, it could be a good reference.</p>
+</div>
+<div class="section" id="step-3-register-the-operator">
+<h2>Step 3, register the operator:<a class="headerlink" href="#step-3-register-the-operator" title="Permalink to this headline">¶</a></h2>
+<p>A toolkit tells an operator’s name, corresponding python class, if has backward, support types, config generate functions and benchmark function. A sample toolkit is shown below, whole the parameter list can be read in source code.</p>
+<ol class="arabic simple">
+<li>Write a toolkit, then add it to <code class="docutils literal notranslate"><span class="pre">__all__</span></code></li>
+<li>Add it to <code class="docutils literal notranslate"><span class="pre">doc/report.rst</span></code></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">multiply_toolkit</span> <span class="o">=</span> <span class="n">Toolkit</span><span class="p">(</span><span class="n">has_backward</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;multiply&#39;</span><span class="p">,</span> <span class="n">operator_cls</span><span class="o">=</span><span class="n">ops</span><span class="o">.</span><span class="n">Multiply</span><span class="p">,</span>
+                           <span class="n">random_config_func</span><span class="o">=</span><span class="n">get_random_size_config</span><span class="p">,</span>
+                           <span class="n">determined_config_func</span><span class="o">=</span><span class="n">get_size_configs</span><span class="p">,</span>
+                           <span class="n">benchmark_func</span><span class="o">=</span><span class="n">run_binary_op_benchmark</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -269,8 +322,12 @@
         <dl>
             <dt>Devices</dt>
             
-                <dd><a href="../">CPU</a></dd>
-                <dd><a href="./">GPU</a></dd>
+            
+                
+            
+            
+                <dd><a href=./../cpu/doc.html>CPU</a></dd>
+                <dd><a href="">GPU</a></dd>
             
         </dl>
     </div>

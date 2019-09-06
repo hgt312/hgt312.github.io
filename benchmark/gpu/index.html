@@ -149,7 +149,7 @@
             
   <div class="section" id="numpy-compatible-operator-benchmark">
 <h1>NumPy Compatible Operator Benchmark<a class="headerlink" href="#numpy-compatible-operator-benchmark" title="Permalink to this headline">¶</a></h1>
-<p>Built in Sep 05, 2019.</p>
+<p>Built in Sep 06, 2019.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="report.html">Operator reports</a><ul>
@@ -163,6 +163,9 @@
 <li class="toctree-l2"><a class="reference internal" href="doc.html#ops">Ops</a></li>
 <li class="toctree-l2"><a class="reference internal" href="doc.html#frameworks">Frameworks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="doc.html#design">Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doc.html#step-1-write-config-generation-functions">Step 1, write config generation functions:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doc.html#step-2-write-benchmark-functions">Step 2, write benchmark functions:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="doc.html#step-3-register-the-operator">Step 3, register the operator:</a></li>
 </ul>
 </li>
 </ul>
@@ -266,14 +269,14 @@ pip install -r requirements.txt
 <div class="section" id="cpu-only">
 <h4>CPU only<a class="headerlink" href="#cpu-only" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>CUDA_VISIBLE_DEVICES=-1 python -m NumpyXBench.tools --warmup 10 --runs 25 --device cpu --info &quot;MacBook Pro, CPU&quot;
-sphinx-build -b html . _build -A current_device=CPU
+sphinx-build -b html . _build/cpu -A current_device=CPU
 </pre></div>
 </div>
 </div>
 <div class="section" id="with-gpu-enabled">
 <h4>With GPU enabled<a class="headerlink" href="#with-gpu-enabled" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-guess notranslate"><div class="highlight"><pre><span></span><span class="n">CUDA_VISIBLE_DEVICES</span><span class="o">=-</span><span class="mi">1</span> <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">NumpyXBench</span><span class="p">.</span><span class="n">tools</span> <span class="o">--</span><span class="n">warmup</span> <span class="mi">10</span> <span class="o">--</span><span class="n">runs</span> <span class="mi">25</span> <span class="o">--</span><span class="n">device</span> <span class="n">cpu</span> <span class="o">--</span><span class="n">info</span> <span class="s">&quot;[Machine infomation]&quot;</span>
-<span class="n">sphinx</span><span class="o">-</span><span class="n">build</span> <span class="o">-</span><span class="n">b</span> <span class="n">html</span> <span class="p">.</span> <span class="n">_build</span> <span class="o">-</span><span class="n">A</span> <span class="n">current_device</span><span class="o">=</span><span class="n">CPU</span>
+<span class="n">sphinx</span><span class="o">-</span><span class="n">build</span> <span class="o">-</span><span class="n">b</span> <span class="n">html</span> <span class="p">.</span> <span class="n">_build</span><span class="o">/</span><span class="n">cpu</span> <span class="o">-</span><span class="n">A</span> <span class="n">current_device</span><span class="o">=</span><span class="n">CPU</span>
 <span class="n">CUDA_VISIBLE_DEVICES</span><span class="o">=</span><span class="mi">0</span> <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">NumpyXBench</span><span class="p">.</span><span class="n">tools</span> <span class="o">--</span><span class="n">warmup</span> <span class="mi">10</span> <span class="o">--</span><span class="n">runs</span> <span class="mi">25</span> <span class="o">--</span><span class="n">device</span> <span class="n">gpu</span> <span class="o">--</span><span class="n">info</span> <span class="s">&quot;[Machine infomation]&quot;</span>
 <span class="n">sphinx</span><span class="o">-</span><span class="n">build</span> <span class="o">-</span><span class="n">b</span> <span class="n">html</span> <span class="p">.</span> <span class="n">_build</span><span class="o">/</span><span class="n">gpu</span> <span class="o">-</span><span class="n">A</span> <span class="n">current_device</span><span class="o">=</span><span class="n">GPU</span>
 </pre></div>
@@ -384,8 +387,12 @@ sphinx-build -b html . _build -A current_device=CPU
         <dl>
             <dt>Devices</dt>
             
-                <dd><a href="../">CPU</a></dd>
-                <dd><a href="./">GPU</a></dd>
+            
+                
+            
+            
+                <dd><a href=./../cpu/index.html>CPU</a></dd>
+                <dd><a href="">GPU</a></dd>
             
         </dl>
     </div>
