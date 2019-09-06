@@ -212,16 +212,11 @@
 <li>Tool for test coverage</li>
 <li>Tools for generate result plots and website generation</li>
 </ul>
-<p><strong>Blob package:</strong> Blob package register an operator, its name, its config-generation function and benchmark function. The blobs is divided by operator type.</p>
-<p>A sample blob can be obtained by a provided function:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_add_blob</span><span class="p">(</span><span class="n">dtypes</span><span class="o">=</span><span class="n">RealTypes</span><span class="p">,</span> <span class="n">is_random</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">is_random</span><span class="p">:</span>
-        <span class="n">config_func</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">get_random_size_config</span><span class="p">,</span> <span class="n">get_dtypes</span><span class="p">(</span><span class="n">dtypes</span><span class="p">))</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">config_func</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">get_size_configs</span><span class="p">,</span> <span class="n">get_dtypes</span><span class="p">(</span><span class="n">dtypes</span><span class="p">))</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">ops</span><span class="o">.</span><span class="n">Add</span><span class="p">,</span>
-            <span class="n">config_func</span><span class="p">,</span>
-            <span class="n">run_binary_op_benchmark</span><span class="p">),</span> <span class="s1">&#39;add&#39;</span>
+<p><strong>Toolkits package:</strong> Toolkits package register an operator, its name, its config-generation function and benchmark function. The toolkits is divided by operator type. In addition, one toolkits record the information such as if the operator has backward and the types it supported.</p>
+<p>A sample toolkit:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sum_toolkit</span> <span class="o">=</span> <span class="n">Toolkit</span><span class="p">(</span><span class="n">has_backward</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="n">operator_cls</span><span class="o">=</span><span class="n">ops</span><span class="o">.</span><span class="n">Sum</span><span class="p">,</span>
+                      <span class="n">random_config_func</span><span class="o">=</span><span class="n">get_random_withaxis_config</span><span class="p">,</span>
+                      <span class="n">benchmark_func</span><span class="o">=</span><span class="n">run_unary_op_benchmark</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>Others:</strong> need test, doc-gen, logging.</p>
@@ -266,15 +261,17 @@
   </div>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
-        <span class="fa fa-book"> Other Versions</span>
+        <span class="fa fa-book"> Device Switcher</span>
         Current device: GPU
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
         <dl>
             <dt>Devices</dt>
-            <dd><a href="cpu/">CPU</a></dd>
-            <dd><a href="gpu/">GPU</a></dd>
+            
+                <dd><a href="../">CPU</a></dd>
+                <dd><a href="./">GPU</a></dd>
+            
         </dl>
     </div>
 </div>
