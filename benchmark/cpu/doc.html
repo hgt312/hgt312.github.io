@@ -85,13 +85,13 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Development Document</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#ops">Ops</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#frameworks">Frameworks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#design">Design</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#contribute">Contribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#design">Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contribute">Contribute</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-write-config-generation-functions">Step 1, write config generation functions:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-write-benchmark-functions">Step 2, write benchmark functions:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-register-the-operator">Step 3, register the operator:</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#step-1-write-config-generation-functions">Step 1, write config generation functions:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-2-write-benchmark-functions">Step 2, write benchmark functions:</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#step-3-register-the-operator">Step 3, register the operator:</a></li>
 </ul>
 </li>
 </ul>
@@ -223,13 +223,12 @@
 </pre></div>
 </div>
 <p><strong>Others:</strong> need test, doc-gen, logging.</p>
+</div>
 <div class="section" id="contribute">
-<h3>Contribute<a class="headerlink" href="#contribute" title="Permalink to this headline">¶</a></h3>
+<h2>Contribute<a class="headerlink" href="#contribute" title="Permalink to this headline">¶</a></h2>
 <p>For all the operator list can be obtained, the mainly work is to write config generation functions and corresponding benchmark functions for lots of types of operators. After that, register the operator so that it can be seen in generated report.</p>
-</div>
-</div>
 <div class="section" id="step-1-write-config-generation-functions">
-<h2>Step 1, write config generation functions:<a class="headerlink" href="#step-1-write-config-generation-functions" title="Permalink to this headline">¶</a></h2>
+<h3>Step 1, write config generation functions:<a class="headerlink" href="#step-1-write-config-generation-functions" title="Permalink to this headline">¶</a></h3>
 <p>A config is consist of parameter used to generate input tensor and other necessary arguments. A single config is a python dict, for example <code class="docutils literal notranslate"><span class="pre">{'shape':</span> <span class="pre">(10,</span> <span class="pre">20),</span> <span class="pre">'dtype':</span> <span class="pre">'float32'}</span></code>.</p>
 <p>The input of a config generation function is always <code class="docutils literal notranslate"><span class="pre">dtype</span></code>. To generate random configs, return a dict; to generate determined configs, return a list of dicts.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># random</span>
@@ -260,12 +259,12 @@
 <p><em>P.S.: There are some basic config spaces that can be useful for writing config functions.</em></p>
 </div>
 <div class="section" id="step-2-write-benchmark-functions">
-<h2>Step 2, write benchmark functions:<a class="headerlink" href="#step-2-write-benchmark-functions" title="Permalink to this headline">¶</a></h2>
+<h3>Step 2, write benchmark functions:<a class="headerlink" href="#step-2-write-benchmark-functions" title="Permalink to this headline">¶</a></h3>
 <p>A benchmark function defines how to test the performance of a specific operator, its implementation is related to the config corresponding to the operator.</p>
 <p>Handle different part of config by different methods: handle tensors by a python list, then handle other arguments by a python dict. A general benchmark function which can handle all configs with tensors with same shape and dtype is completed, it could be a good reference.</p>
 </div>
 <div class="section" id="step-3-register-the-operator">
-<h2>Step 3, register the operator:<a class="headerlink" href="#step-3-register-the-operator" title="Permalink to this headline">¶</a></h2>
+<h3>Step 3, register the operator:<a class="headerlink" href="#step-3-register-the-operator" title="Permalink to this headline">¶</a></h3>
 <p>A toolkit tells an operator’s name, corresponding python class, if has backward, support types, config generate functions and benchmark function. A sample toolkit is shown below, whole the parameter list can be read in source code.</p>
 <ol class="arabic simple">
 <li>Write a toolkit, then add it to <code class="docutils literal notranslate"><span class="pre">__all__</span></code></li>
@@ -276,6 +275,7 @@
                            <span class="n">determined_config_func</span><span class="o">=</span><span class="n">get_size_configs</span><span class="p">,</span>
                            <span class="n">benchmark_func</span><span class="o">=</span><span class="n">run_binary_op_benchmark</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
