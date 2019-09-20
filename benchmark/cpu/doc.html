@@ -1,0 +1,354 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Development Document &mdash; NumPy Compatible Operator Benchmark  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-1.3.4.min.js"></script>
+        <script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.3.4.min.js"></script>
+        <script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-tables-1.3.4.min.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/my_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Operator prod" href="reports/prod.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> NumPy Compatible Operator Benchmark
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="report.html">Operator reports</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Development Document</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ops">Ops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#frameworks">Frameworks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#design">Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contribute">Contribute</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-write-config-generation-functions">Step 1, write config generation functions:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-write-benchmark-functions">Step 2, write benchmark functions:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-register-the-operator">Step 3, register the operator:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">NumPy Compatible Operator Benchmark</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Development Document</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/doc.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="development-document">
+<h1>Development Document<a class="headerlink" href="#development-document" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="ops">
+<h2>Ops<a class="headerlink" href="#ops" title="Permalink to this headline">¶</a></h2>
+<p>We write configs for different categories of numpy operators, this can be obtain from <a class="reference external" href="https://github.com/mli/deepnumpy-doc">deepnumpy-doc</a>:</p>
+<ul class="simple">
+<li>Unary ops</li>
+<li>Binary ops</li>
+<li>Array creations</li>
+<li>……</li>
+</ul>
+</div>
+<div class="section" id="frameworks">
+<h2>Frameworks<a class="headerlink" href="#frameworks" title="Permalink to this headline">¶</a></h2>
+<p>We should support these frameworks, some has same API as NumPy, can be supported easily, while others may cost a lot of time to deal with:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.scipy.org/doc/numpy/index.html">NumPy</a></li>
+<li><a class="reference external" href="https://mxnet.apache.org/">MXNet</a></li>
+<li><a class="reference external" href="https://docs.chainer.org/en/stable/chainerx/">Chainerx &amp; Cupy</a></li>
+<li><a class="reference external" href="https://github.com/google/jax">JAX</a></li>
+<li>torch (TBD)</li>
+<li>tensorflow 1&amp;2 (TBD)</li>
+</ul>
+</div>
+<div class="section" id="design">
+<h2>Design<a class="headerlink" href="#design" title="Permalink to this headline">¶</a></h2>
+<p><strong>Ops package:</strong> in directory <code class="docutils literal notranslate"><span class="pre">operators</span></code>, ops with different numpy modules in different files, an Op object only need one argument, <code class="docutils literal notranslate"><span class="pre">backend</span></code>. All the ops under numpy should in <code class="docutils literal notranslate"><span class="pre">common_ops.py</span></code>, and linear algebra ops (under numpy.linalg) should be written in <code class="docutils literal notranslate"><span class="pre">la_ops.py</span></code> ……</p>
+<p>In this part, most of ops can be generate by template. If the path to get the op function in each framework has the same/similar pattern (means that its user interface is same/similar to NumPy), it can be generated automatically.</p>
+<p>If you want to add your custom op class, sample code is shown below, just return the function pointer of each backend, actually different operator can be returned:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TVMAdd&#39;</span><span class="p">]</span>  <span class="c1"># add op to here</span>
+
+<span class="k">class</span> <span class="nc">TVMAdd</span><span class="p">(</span><span class="n">CommonOp</span><span class="p">):</span>
+    <span class="n">_name</span> <span class="o">=</span> <span class="s2">&quot;tvm_add&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">backend</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">TVMAdd</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_forward_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">backend_switcher</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;numpy&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">add</span>
+        <span class="k">elif</span> <span class="n">backend_switcher</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;jax.numpy&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">jax</span><span class="o">.</span><span class="n">add</span>
+        <span class="k">elif</span> <span class="n">backend_switcher</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;mxnet.numpy&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">mxnet</span><span class="o">.</span><span class="n">numpy</span><span class="o">.</span><span class="n">add</span>
+        <span class="k">elif</span> <span class="n">backend_switcher</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_backend</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;chainerx&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">chainerx</span><span class="o">.</span><span class="n">add</span>
+</pre></div>
+</div>
+<p><strong>Configs package:</strong> get information of input arguments: <strong>input shape, dtype</strong> …… It depends on the type of op. Need to determine benchmark ways (random size/several determined size). A big config function can be built by multiple small provided config spaces. Random config would be a python dict, while the determined would be a list.</p>
+<p><strong>Utils:</strong></p>
+<ul class="simple">
+<li>Functions to do benchmarks (<strong>single op, op cross frameworks, ops on single framework, and ops on frameworks</strong>).</li>
+<li>Helper functions for backends.</li>
+<li>Time metric.</li>
+</ul>
+<p><strong>Tools:</strong></p>
+<ul class="simple">
+<li>Tools for global setting</li>
+<li>Tool for test coverage</li>
+<li>Tools for generate result plots and website generation</li>
+</ul>
+<p><strong>Toolkits package:</strong> Toolkits package register an operator, its config-generation function and benchmark function. The toolkits is divided by operator type. In addition, one toolkits record the information such as if the operator has backward and the types it supported.</p>
+<p>A sample toolkit:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sum_toolkit</span> <span class="o">=</span> <span class="n">Toolkit</span><span class="p">(</span><span class="n">has_backward</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">operator_cls</span><span class="o">=</span><span class="n">ops</span><span class="o">.</span><span class="n">Sum</span><span class="p">,</span>
+                      <span class="n">random_config_func</span><span class="o">=</span><span class="n">get_random_withaxis_config</span><span class="p">,</span>
+                      <span class="n">benchmark_func</span><span class="o">=</span><span class="n">run_unary_op_benchmark</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Others:</strong> need test, doc-gen, logging.</p>
+</div>
+<div class="section" id="contribute">
+<h2>Contribute<a class="headerlink" href="#contribute" title="Permalink to this headline">¶</a></h2>
+<p>For all the operator list can be obtained, the mainly work is to write config generation functions and corresponding benchmark functions for lots of types of operators. After that, register the operator so that it can be seen in generated report.</p>
+<div class="section" id="step-1-write-config-generation-functions">
+<h3>Step 1, write config generation functions:<a class="headerlink" href="#step-1-write-config-generation-functions" title="Permalink to this headline">¶</a></h3>
+<p>A config is consist of parameter used to generate input tensor and other necessary arguments. A single config is a python dict, for example <code class="docutils literal notranslate"><span class="pre">{'shape':</span> <span class="pre">(10,</span> <span class="pre">20),</span> <span class="pre">'dtype':</span> <span class="pre">'float32'}</span></code>.</p>
+<p>The input of a config generation function is always <code class="docutils literal notranslate"><span class="pre">dtype</span></code>. To generate random configs, return a dict; to generate determined configs, return a list of dicts.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># random</span>
+<span class="k">def</span> <span class="nf">get_random_size_config</span><span class="p">(</span><span class="n">dtypes</span><span class="p">):</span>
+    <span class="n">config_space</span> <span class="o">=</span> <span class="n">random_size_cs</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">config_space</span><span class="o">.</span><span class="n">sample_configuration</span><span class="p">()</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;size&#39;</span><span class="p">),)</span>
+    <span class="c1"># random dtype</span>
+    <span class="n">config_space</span> <span class="o">=</span> <span class="n">cs</span><span class="o">.</span><span class="n">ConfigurationSpace</span><span class="p">()</span>
+    <span class="n">config_space</span><span class="o">.</span><span class="n">add_hyperparameter</span><span class="p">(</span><span class="n">csh</span><span class="o">.</span><span class="n">CategoricalHyperparameter</span><span class="p">(</span><span class="s1">&#39;dtype&#39;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">dtypes</span><span class="p">))</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">config_space</span><span class="o">.</span><span class="n">sample_configuration</span><span class="p">()</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dtype&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="n">shape</span><span class="p">,</span> <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="n">dtype</span><span class="p">}</span>
+
+
+<span class="c1"># determined</span>
+<span class="k">def</span> <span class="nf">get_size_configs</span><span class="p">(</span><span class="n">dtypes</span><span class="p">):</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">dtypes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">configs</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span> <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="n">dtype</span><span class="p">},</span>
+               <span class="p">{</span><span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span> <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="n">dtype</span><span class="p">},</span>
+               <span class="p">{</span><span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">),</span> <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="n">dtype</span><span class="p">},</span>
+               <span class="p">{</span><span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="n">dtype</span><span class="p">},</span>
+               <span class="p">{</span><span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">),</span> <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="n">dtype</span><span class="p">},</span>
+               <span class="p">{</span><span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;dtype&#39;</span><span class="p">:</span> <span class="n">dtype</span><span class="p">}]</span>
+    <span class="k">return</span> <span class="n">configs</span>
+</pre></div>
+</div>
+<p><em>P.S.: There are some basic config spaces that can be useful for writing config functions.</em></p>
+</div>
+<div class="section" id="step-2-write-benchmark-functions">
+<h3>Step 2, write benchmark functions:<a class="headerlink" href="#step-2-write-benchmark-functions" title="Permalink to this headline">¶</a></h3>
+<p>A benchmark function defines how to test the performance of a specific operator, its implementation is related to the config corresponding to the operator.</p>
+<p>Handle different part of config by different methods: handle tensors by a python list, then handle other arguments by a python dict. A general benchmark function which can handle all configs with tensors with same shape and dtype is completed, it could be a good reference.</p>
+</div>
+<div class="section" id="step-3-register-the-operator">
+<h3>Step 3, register the operator:<a class="headerlink" href="#step-3-register-the-operator" title="Permalink to this headline">¶</a></h3>
+<p>A toolkit tells an operator’s corresponding python class, if has backward, support types, config generate functions and benchmark function. A sample toolkit is shown below, whole the parameter list can be read in source code.</p>
+<ol class="arabic simple">
+<li>Write a toolkit, then add it to <code class="docutils literal notranslate"><span class="pre">__all__</span></code></li>
+<li>Add it to <code class="docutils literal notranslate"><span class="pre">doc/report.rst</span></code></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">multiply_toolkit</span> <span class="o">=</span> <span class="n">Toolkit</span><span class="p">(</span><span class="n">has_backward</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">operator_cls</span><span class="o">=</span><span class="n">ops</span><span class="o">.</span><span class="n">Multiply</span><span class="p">,</span>
+                           <span class="n">random_config_func</span><span class="o">=</span><span class="n">get_random_size_config</span><span class="p">,</span>
+                           <span class="n">determined_config_func</span><span class="o">=</span><span class="n">get_size_configs</span><span class="p">,</span>
+                           <span class="n">benchmark_func</span><span class="o">=</span><span class="n">run_binary_op_benchmark</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="reports/prod.html" class="btn btn-neutral float-left" title="Operator prod" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, hgt312
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Device Switcher</span>
+        Current device: CPU
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Devices</dt>
+            
+            
+                
+            
+            
+                <dd><a href="">CPU</a></dd>
+                <dd><a href=./../gpu/doc.html>GPU</a></dd>
+            
+        </dl>
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
