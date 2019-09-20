@@ -1,0 +1,487 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Operator linspace &mdash; NumPy Compatible Operator Benchmark  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-1.3.4.min.js"></script>
+        <script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.3.4.min.js"></script>
+        <script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-tables-1.3.4.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/my_theme.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Operator sum" href="sum.html" />
+    <link rel="prev" title="Operator arange" href="arange.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> NumPy Compatible Operator Benchmark
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../report.html">Operator reports</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../report.html#binary-operators">Binary operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../report.html#unary-operators">Unary operators</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../report.html#creation-operators">Creation operators</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="empty.html">Operator <cite>empty</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ones.html">Operator <cite>ones</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zeros.html">Operator <cite>zeros</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ones_like.html">Operator <cite>ones_like</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zeros_like.html">Operator <cite>zeros_like</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="arange.html">Operator <cite>arange</cite></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Operator <cite>linspace</cite></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../report.html#reduction-operators">Reduction operators</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../doc.html">Development Document</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NumPy Compatible Operator Benchmark</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../report.html">Operator reports</a> &raquo;</li>
+        
+      <li>Operator <cite>linspace</cite></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/reports/linspace.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="operator-linspace">
+<h1>Operator <cite>linspace</cite><a class="headerlink" href="#operator-linspace" title="Permalink to this headline">¶</a></h1>
+<script type="text/javascript">
+  (function() {
+    var fn = function() {
+      Bokeh.safely(function() {
+        (function(root) {
+          function embed_document(root) {
+
+          var docs_json = '{"16e46b68-03c4-4813-a3e8-e8128f36c895":{"roots":{"references":[{"attributes":{},"id":"1025","type":"SaveTool"},{"attributes":{"grid_line_color":null,"ticker":{"id":"1014","type":"CategoricalTicker"}},"id":"1016","type":"Grid"},{"attributes":{},"id":"1026","type":"ResetTool"},{"attributes":{"callback":null,"data":{"configs":["{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 58,\\n &#x27;start&#x27;: 4603,\\n &#x27;stop&#x27;: 6219}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 58,\\n &#x27;start&#x27;: 4603,\\n &#x27;stop&#x27;: 6219}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 58,\\n &#x27;start&#x27;: 4603,\\n &#x27;stop&#x27;: 6219}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 58,\\n &#x27;start&#x27;: 4603,\\n &#x27;stop&#x27;: 6219}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 4825,\\n &#x27;start&#x27;: 2780,\\n &#x27;stop&#x27;: 2805}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 4825,\\n &#x27;start&#x27;: 2780,\\n &#x27;stop&#x27;: 2805}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 4825,\\n &#x27;start&#x27;: 2780,\\n &#x27;stop&#x27;: 2805}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 4825,\\n &#x27;start&#x27;: 2780,\\n &#x27;stop&#x27;: 2805}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 5746,\\n &#x27;start&#x27;: 8637,\\n &#x27;stop&#x27;: 25840}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 5746,\\n &#x27;start&#x27;: 8637,\\n &#x27;stop&#x27;: 25840}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 5746,\\n &#x27;start&#x27;: 8637,\\n &#x27;stop&#x27;: 25840}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 5746,\\n &#x27;start&#x27;: 8637,\\n &#x27;stop&#x27;: 25840}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 701,\\n &#x27;start&#x27;: 7685,\\n &#x27;stop&#x27;: 8923}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 701,\\n &#x27;start&#x27;: 7685,\\n &#x27;stop&#x27;: 8923}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 701,\\n &#x27;start&#x27;: 7685,\\n &#x27;stop&#x27;: 8923}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 701,\\n &#x27;start&#x27;: 7685,\\n &#x27;stop&#x27;: 8923}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 4023,\\n &#x27;start&#x27;: 4674,\\n &#x27;stop&#x27;: 8353}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 4023,\\n &#x27;start&#x27;: 4674,\\n &#x27;stop&#x27;: 8353}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 4023,\\n &#x27;start&#x27;: 4674,\\n &#x27;stop&#x27;: 8353}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 4023,\\n &#x27;start&#x27;: 4674,\\n &#x27;stop&#x27;: 8353}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 38,\\n &#x27;start&#x27;: 484,\\n &#x27;stop&#x27;: 518}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 38,\\n &#x27;start&#x27;: 484,\\n &#x27;stop&#x27;: 518}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 38,\\n &#x27;start&#x27;: 484,\\n &#x27;stop&#x27;: 518}","{&#x27;dtype&#x27;: &#x27;float32&#x27;,\\n &#x27;num&#x27;: 38,\\n &#x27;start&#x27;: 484,\\n &#x27;stop&#x27;: 518}"],"millisecond":[0.05178429892112035,0.10760179939097725,0.052069799858145416,0.014564399316441268,0.06725509992975276,0.11433729923737701,0.06728619991918094,0.026724900089902803,0.06885730035719462,0.1138374995207414,0.07572810063720681,0.02841140048985835,0.054947899843682535,0.11031009962607641,0.05599579926638398,0.01581899996381253,0.06504330049210694,0.10988300018652808,0.06418119992304128,0.0240704004681902,0.051853599507012405,0.10610509925754741,0.050886300959973596,0.014322699280455709],"rates":[1.0,0.4812586705261235,0.9945169572803648,3.5555396275535216,1.0,0.5882166220327075,0.9995377954251312,2.5165706776641263,1.0,0.6048736193880356,0.9092701358914524,2.4235799422057256,1.0,0.4981221123899094,0.9812861065217344,3.47353814838998,1.0,0.5919323314952717,1.013432291233249,2.7022109822420166,1.0,0.48870035342174173,1.0190090167449914,3.620378986646054],"stds":[0.001538835160435543,0.0020974622897814306,0.0009724059562845999,0.0004426550883754578,0.0013591205390819242,0.00969603323199533,0.003354555072758391,0.0013623898599426964,0.0006790519452866646,0.00979874183167853,0.014486323745942078,0.00031125180767871874,0.0008963637396302375,0.008241045047159015,0.0010205449451031353,0.00040419226590856936,0.0009270024689667163,0.0016237583545805213,0.0008406679213619289,0.00032186068495419735,0.0015998338520015636,0.0014838711160717966,0.0011442043915235837,0.0007411480299067846],"x":[["config1","numpy"],["config1","mxnet"],["config1","jax"],["config1","chainerx"],["config2","numpy"],["config2","mxnet"],["config2","jax"],["config2","chainerx"],["config3","numpy"],["config3","mxnet"],["config3","jax"],["config3","chainerx"],["config4","numpy"],["config4","mxnet"],["config4","jax"],["config4","chainerx"],["config5","numpy"],["config5","mxnet"],["config5","jax"],["config5","chainerx"],["config6","numpy"],["config6","mxnet"],["config6","jax"],["config6","chainerx"]]},"selected":{"id":"1048","type":"Selection"},"selection_policy":{"id":"1049","type":"UnionRenderers"}},"id":"1001","type":"ColumnDataSource"},{"attributes":{"axis_label":"Speedup","formatter":{"id":"1045","type":"BasicTickFormatter"},"ticker":{"id":"1018","type":"BasicTicker"}},"id":"1017","type":"LinearAxis"},{"attributes":{"callback":null,"factors":[["config1","numpy"],["config1","mxnet"],["config1","jax"],["config1","chainerx"],["config2","numpy"],["config2","mxnet"],["config2","jax"],["config2","chainerx"],["config3","numpy"],["config3","mxnet"],["config3","jax"],["config3","chainerx"],["config4","numpy"],["config4","mxnet"],["config4","jax"],["config4","chainerx"],["config5","numpy"],["config5","mxnet"],["config5","jax"],["config5","chainerx"],["config6","numpy"],["config6","mxnet"],["config6","jax"],["config6","chainerx"]],"range_padding":0.1},"id":"1002","type":"FactorRange"},{"attributes":{},"id":"1027","type":"HelpTool"},{"attributes":{"below":[{"id":"1013","type":"CategoricalAxis"}],"center":[{"id":"1016","type":"Grid"},{"id":"1021","type":"Grid"}],"left":[{"id":"1017","type":"LinearAxis"}],"plot_width":800,"renderers":[{"id":"1041","type":"GlyphRenderer"}],"title":{"id":"1004","type":"Title"},"toolbar":{"id":"1029","type":"Toolbar"},"toolbar_location":"above","x_range":{"id":"1002","type":"FactorRange"},"x_scale":{"id":"1009","type":"CategoricalScale"},"y_range":{"id":"1007","type":"DataRange1d"},"y_scale":{"id":"1011","type":"LinearScale"}},"id":"1003","subtype":"Figure","type":"Plot"},{"attributes":{},"id":"1018","type":"BasicTicker"},{"attributes":{},"id":"1047","type":"CategoricalTickFormatter"},{"attributes":{"callback":null,"tooltips":[["config","@configs"],["latency","@millisecond ms"],["std_dev","@stds ms"],["speedup","@rates"]]},"id":"1028","type":"HoverTool"},{"attributes":{"bottom":{"value":-0.24135859910973692},"fill_alpha":{"value":0.1},"fill_color":{"value":"#1f77b4"},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"top":{"field":"rates"},"width":{"value":0.9},"x":{"field":"x"}},"id":"1040","type":"VBar"},{"attributes":{"active_drag":"auto","active_inspect":"auto","active_multi":null,"active_scroll":"auto","active_tap":"auto","tools":[{"id":"1022","type":"PanTool"},{"id":"1023","type":"WheelZoomTool"},{"id":"1024","type":"BoxZoomTool"},{"id":"1025","type":"SaveTool"},{"id":"1026","type":"ResetTool"},{"id":"1027","type":"HelpTool"},{"id":"1028","type":"HoverTool"}]},"id":"1029","type":"Toolbar"},{"attributes":{"dimension":1,"ticker":{"id":"1018","type":"BasicTicker"}},"id":"1021","type":"Grid"},{"attributes":{"callback":null,"start":-0.24135859910973692},"id":"1007","type":"DataRange1d"},{"attributes":{},"id":"1048","type":"Selection"},{"attributes":{"data_source":{"id":"1001","type":"ColumnDataSource"},"glyph":{"id":"1039","type":"VBar"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1040","type":"VBar"},"selection_glyph":null,"view":{"id":"1042","type":"CDSView"}},"id":"1041","type":"GlyphRenderer"},{"attributes":{},"id":"1049","type":"UnionRenderers"},{"attributes":{},"id":"1011","type":"LinearScale"},{"attributes":{"bottom_units":"screen","fill_alpha":{"value":0.5},"fill_color":{"value":"lightgrey"},"left_units":"screen","level":"overlay","line_alpha":{"value":1.0},"line_color":{"value":"black"},"line_dash":[4,4],"line_width":{"value":2},"render_mode":"css","right_units":"screen","top_units":"screen"},"id":"1050","type":"BoxAnnotation"},{"attributes":{"source":{"id":"1001","type":"ColumnDataSource"}},"id":"1042","type":"CDSView"},{"attributes":{},"id":"1009","type":"CategoricalScale"},{"attributes":{},"id":"1045","type":"BasicTickFormatter"},{"attributes":{},"id":"1022","type":"PanTool"},{"attributes":{"text":"NumPy operator linspace - EC2 p3.8xlarge, GPU, float32, forward only"},"id":"1004","type":"Title"},{"attributes":{"formatter":{"id":"1047","type":"CategoricalTickFormatter"},"major_label_orientation":1,"ticker":{"id":"1014","type":"CategoricalTicker"}},"id":"1013","type":"CategoricalAxis"},{"attributes":{"bottom":{"value":-0.24135859910973692},"fill_color":{"field":"x","transform":{"id":"1037","type":"CategoricalColorMapper"}},"line_color":{"value":"white"},"top":{"field":"rates"},"width":{"value":0.9},"x":{"field":"x"}},"id":"1039","type":"VBar"},{"attributes":{},"id":"1023","type":"WheelZoomTool"},{"attributes":{"end":2,"factors":["numpy","mxnet","jax","chainerx"],"palette":["#756bb1","#43a2ca","#e84d60","#2ca25f"],"start":1},"id":"1037","type":"CategoricalColorMapper"},{"attributes":{},"id":"1014","type":"CategoricalTicker"},{"attributes":{"overlay":{"id":"1050","type":"BoxAnnotation"}},"id":"1024","type":"BoxZoomTool"}],"root_ids":["1003"]},"title":"Bokeh Application","version":"1.3.4"}}';
+          var render_items = [{"docid":"16e46b68-03c4-4813-a3e8-e8128f36c895","roots":{"1003":"1ab88016-47af-41c7-93c2-e8493c5a1387"}}];
+          root.Bokeh.embed.embed_items(docs_json, render_items);
+
+          }
+          if (root.Bokeh !== undefined) {
+            embed_document(root);
+          } else {
+            var attempts = 0;
+            var timer = setInterval(function(root) {
+              if (root.Bokeh !== undefined) {
+                embed_document(root);
+                clearInterval(timer);
+              }
+              attempts++;
+              if (attempts > 100) {
+                console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                clearInterval(timer);
+              }
+            }, 10, root)
+          }
+        })(window);
+      });
+    };
+    if (document.readyState != "loading") fn();
+    else document.addEventListener("DOMContentLoaded", fn);
+  })();
+</script>
+<div class="bk-root" id="1ab88016-47af-41c7-93c2-e8493c5a1387" data-root-id="1003"></div><script type="text/javascript">
+  (function() {
+    var fn = function() {
+      Bokeh.safely(function() {
+        (function(root) {
+          function embed_document(root) {
+
+          var docs_json = '{"af02024b-8157-4d1c-87cd-9dc3c1bc4e5a":{"roots":{"references":[{"attributes":{"axis_label":"Speedup","formatter":{"id":"1044","type":"BasicTickFormatter"},"ticker":{"id":"1018","type":"BasicTicker"}},"id":"1017","type":"LinearAxis"},{"attributes":{"callback":null,"data":{"configs":["{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 1356,\\n &#x27;start&#x27;: 7145,\\n &#x27;stop&#x27;: 36581}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 1356,\\n &#x27;start&#x27;: 7145,\\n &#x27;stop&#x27;: 36581}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 1356,\\n &#x27;start&#x27;: 7145,\\n &#x27;stop&#x27;: 36581}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 1356,\\n &#x27;start&#x27;: 7145,\\n &#x27;stop&#x27;: 36581}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 6,\\n &#x27;start&#x27;: 1333,\\n &#x27;stop&#x27;: 69644}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 6,\\n &#x27;start&#x27;: 1333,\\n &#x27;stop&#x27;: 69644}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 6,\\n &#x27;start&#x27;: 1333,\\n &#x27;stop&#x27;: 69644}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 6,\\n &#x27;start&#x27;: 1333,\\n &#x27;stop&#x27;: 69644}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 8649,\\n &#x27;start&#x27;: 6819,\\n &#x27;stop&#x27;: 6838}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 8649,\\n &#x27;start&#x27;: 6819,\\n &#x27;stop&#x27;: 6838}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 8649,\\n &#x27;start&#x27;: 6819,\\n &#x27;stop&#x27;: 6838}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 8649,\\n &#x27;start&#x27;: 6819,\\n &#x27;stop&#x27;: 6838}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 183,\\n &#x27;start&#x27;: 2204,\\n &#x27;stop&#x27;: 3304}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 183,\\n &#x27;start&#x27;: 2204,\\n &#x27;stop&#x27;: 3304}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 183,\\n &#x27;start&#x27;: 2204,\\n &#x27;stop&#x27;: 3304}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 183,\\n &#x27;start&#x27;: 2204,\\n &#x27;stop&#x27;: 3304}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 104,\\n &#x27;start&#x27;: 5213,\\n &#x27;stop&#x27;: 91495}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 104,\\n &#x27;start&#x27;: 5213,\\n &#x27;stop&#x27;: 91495}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 104,\\n &#x27;start&#x27;: 5213,\\n &#x27;stop&#x27;: 91495}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 104,\\n &#x27;start&#x27;: 5213,\\n &#x27;stop&#x27;: 91495}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 2227,\\n &#x27;start&#x27;: 6521,\\n &#x27;stop&#x27;: 36518}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 2227,\\n &#x27;start&#x27;: 6521,\\n &#x27;stop&#x27;: 36518}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 2227,\\n &#x27;start&#x27;: 6521,\\n &#x27;stop&#x27;: 36518}","{&#x27;dtype&#x27;: &#x27;float64&#x27;,\\n &#x27;num&#x27;: 2227,\\n &#x27;start&#x27;: 6521,\\n &#x27;stop&#x27;: 36518}"],"millisecond":[0.05346250000002328,0.11359830023138784,0.05342880067473743,0.018782299957820214,0.05144440037838649,0.11060410033678636,0.04818330125999637,0.015078200158313848,0.08173199930752162,0.11255939971306361,0.0731625004846137,0.03945530115743168,0.04910849893349223,0.11231400021642912,0.04934350108669605,0.0157101996592246,0.04784330049005803,0.1129215001128614,0.05173900026420597,0.014990999989095144,0.05414670049503911,0.11067849954997655,0.05447630064736586,0.020458899962250143],"rates":[1.0,0.47062764047636074,1.000630733328472,2.8464298898476272,1.0,0.4651220001947463,1.0676811059664275,3.411839598774723,1.0,0.7261232692771354,1.1171296602240939,2.071508692365584,1.0,0.4372428979366787,0.9952374244220951,3.125899097320324,1.0,0.4236863701087941,0.9247047729129962,3.1914682492735995,1.0,0.48922510438072325,0.993949659789487,2.646608595523132],"stds":[0.0018426276765538532,0.006682025089983697,0.0011648371735015943,0.0004499832064866092,0.010627326506828402,0.0006073056857578154,0.0008831650422090993,0.0004139637846713354,0.037018465803695624,0.0015104494295578369,0.012793756767805057,0.010983110883802922,0.0008604287611302775,0.001623334070921434,0.0006965384553414324,0.00021205598214999702,0.0006179106232599074,0.009065576372291955,0.00933242051956617,0.00032511051825423075,0.0010772273764840484,0.0013966705819514558,0.0007991286830569452,0.0003523396593799184],"x":[["config1","numpy"],["config1","mxnet"],["config1","jax"],["config1","chainerx"],["config2","numpy"],["config2","mxnet"],["config2","jax"],["config2","chainerx"],["config3","numpy"],["config3","mxnet"],["config3","jax"],["config3","chainerx"],["config4","numpy"],["config4","mxnet"],["config4","jax"],["config4","chainerx"],["config5","numpy"],["config5","mxnet"],["config5","jax"],["config5","chainerx"],["config6","numpy"],["config6","mxnet"],["config6","jax"],["config6","chainerx"]]},"selected":{"id":"1050","type":"Selection"},"selection_policy":{"id":"1049","type":"UnionRenderers"}},"id":"1001","type":"ColumnDataSource"},{"attributes":{},"id":"1027","type":"HelpTool"},{"attributes":{"callback":null,"factors":[["config1","numpy"],["config1","mxnet"],["config1","jax"],["config1","chainerx"],["config2","numpy"],["config2","mxnet"],["config2","jax"],["config2","chainerx"],["config3","numpy"],["config3","mxnet"],["config3","jax"],["config3","chainerx"],["config4","numpy"],["config4","mxnet"],["config4","jax"],["config4","chainerx"],["config5","numpy"],["config5","mxnet"],["config5","jax"],["config5","chainerx"],["config6","numpy"],["config6","mxnet"],["config6","jax"],["config6","chainerx"]],"range_padding":0.1},"id":"1002","type":"FactorRange"},{"attributes":{},"id":"1018","type":"BasicTicker"},{"attributes":{"below":[{"id":"1013","type":"CategoricalAxis"}],"center":[{"id":"1016","type":"Grid"},{"id":"1021","type":"Grid"}],"left":[{"id":"1017","type":"LinearAxis"}],"plot_width":800,"renderers":[{"id":"1041","type":"GlyphRenderer"}],"title":{"id":"1004","type":"Title"},"toolbar":{"id":"1029","type":"Toolbar"},"toolbar_location":"above","x_range":{"id":"1002","type":"FactorRange"},"x_scale":{"id":"1009","type":"CategoricalScale"},"y_range":{"id":"1007","type":"DataRange1d"},"y_scale":{"id":"1011","type":"LinearScale"}},"id":"1003","subtype":"Figure","type":"Plot"},{"attributes":{"callback":null,"tooltips":[["config","@configs"],["latency","@millisecond ms"],["std_dev","@stds ms"],["speedup","@rates"]]},"id":"1028","type":"HoverTool"},{"attributes":{"bottom":{"value":-0.2274559732516482},"fill_color":{"field":"x","transform":{"id":"1037","type":"CategoricalColorMapper"}},"line_color":{"value":"white"},"top":{"field":"rates"},"width":{"value":0.9},"x":{"field":"x"}},"id":"1039","type":"VBar"},{"attributes":{},"id":"1044","type":"BasicTickFormatter"},{"attributes":{"dimension":1,"ticker":{"id":"1018","type":"BasicTicker"}},"id":"1021","type":"Grid"},{"attributes":{"text":"NumPy operator linspace - EC2 p3.8xlarge, GPU, float64, forward only"},"id":"1004","type":"Title"},{"attributes":{"callback":null,"start":-0.2274559732516482},"id":"1007","type":"DataRange1d"},{"attributes":{},"id":"1046","type":"CategoricalTickFormatter"},{"attributes":{"active_drag":"auto","active_inspect":"auto","active_multi":null,"active_scroll":"auto","active_tap":"auto","tools":[{"id":"1022","type":"PanTool"},{"id":"1023","type":"WheelZoomTool"},{"id":"1024","type":"BoxZoomTool"},{"id":"1025","type":"SaveTool"},{"id":"1026","type":"ResetTool"},{"id":"1027","type":"HelpTool"},{"id":"1028","type":"HoverTool"}]},"id":"1029","type":"Toolbar"},{"attributes":{"bottom_units":"screen","fill_alpha":{"value":0.5},"fill_color":{"value":"lightgrey"},"left_units":"screen","level":"overlay","line_alpha":{"value":1.0},"line_color":{"value":"black"},"line_dash":[4,4],"line_width":{"value":2},"render_mode":"css","right_units":"screen","top_units":"screen"},"id":"1048","type":"BoxAnnotation"},{"attributes":{"bottom":{"value":-0.2274559732516482},"fill_alpha":{"value":0.1},"fill_color":{"value":"#1f77b4"},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"top":{"field":"rates"},"width":{"value":0.9},"x":{"field":"x"}},"id":"1040","type":"VBar"},{"attributes":{},"id":"1011","type":"LinearScale"},{"attributes":{"data_source":{"id":"1001","type":"ColumnDataSource"},"glyph":{"id":"1039","type":"VBar"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1040","type":"VBar"},"selection_glyph":null,"view":{"id":"1042","type":"CDSView"}},"id":"1041","type":"GlyphRenderer"},{"attributes":{},"id":"1049","type":"UnionRenderers"},{"attributes":{"end":2,"factors":["numpy","mxnet","jax","chainerx"],"palette":["#756bb1","#43a2ca","#e84d60","#2ca25f"],"start":1},"id":"1037","type":"CategoricalColorMapper"},{"attributes":{},"id":"1009","type":"CategoricalScale"},{"attributes":{"source":{"id":"1001","type":"ColumnDataSource"}},"id":"1042","type":"CDSView"},{"attributes":{},"id":"1022","type":"PanTool"},{"attributes":{},"id":"1050","type":"Selection"},{"attributes":{"formatter":{"id":"1046","type":"CategoricalTickFormatter"},"major_label_orientation":1,"ticker":{"id":"1014","type":"CategoricalTicker"}},"id":"1013","type":"CategoricalAxis"},{"attributes":{},"id":"1023","type":"WheelZoomTool"},{"attributes":{},"id":"1014","type":"CategoricalTicker"},{"attributes":{"overlay":{"id":"1048","type":"BoxAnnotation"}},"id":"1024","type":"BoxZoomTool"},{"attributes":{},"id":"1025","type":"SaveTool"},{"attributes":{"grid_line_color":null,"ticker":{"id":"1014","type":"CategoricalTicker"}},"id":"1016","type":"Grid"},{"attributes":{},"id":"1026","type":"ResetTool"}],"root_ids":["1003"]},"title":"Bokeh Application","version":"1.3.4"}}';
+          var render_items = [{"docid":"af02024b-8157-4d1c-87cd-9dc3c1bc4e5a","roots":{"1003":"0f79b3f9-c1bd-4cb5-ba34-472e12573e60"}}];
+          root.Bokeh.embed.embed_items(docs_json, render_items);
+
+          }
+          if (root.Bokeh !== undefined) {
+            embed_document(root);
+          } else {
+            var attempts = 0;
+            var timer = setInterval(function(root) {
+              if (root.Bokeh !== undefined) {
+                embed_document(root);
+                clearInterval(timer);
+              }
+              attempts++;
+              if (attempts > 100) {
+                console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                clearInterval(timer);
+              }
+            }, 10, root)
+          }
+        })(window);
+      });
+    };
+    if (document.readyState != "loading") fn();
+    else document.addEventListener("DOMContentLoaded", fn);
+  })();
+</script>
+<div class="bk-root" id="0f79b3f9-c1bd-4cb5-ba34-472e12573e60" data-root-id="1003"></div><script type="text/javascript">
+  (function() {
+    var fn = function() {
+      Bokeh.safely(function() {
+        (function(root) {
+          function embed_document(root) {
+
+          var docs_json = '{"d288ad90-912c-49af-9bcb-76d3e9f4f3e3":{"roots":{"references":[{"attributes":{},"id":"1025","type":"SaveTool"},{"attributes":{"grid_line_color":null,"ticker":{"id":"1014","type":"CategoricalTicker"}},"id":"1016","type":"Grid"},{"attributes":{"callback":null,"data":{"configs":["{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 32627,\\n &#x27;start&#x27;: 4988,\\n &#x27;stop&#x27;: 8499}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 32627,\\n &#x27;start&#x27;: 4988,\\n &#x27;stop&#x27;: 8499}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 32627,\\n &#x27;start&#x27;: 4988,\\n &#x27;stop&#x27;: 8499}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 32627,\\n &#x27;start&#x27;: 4988,\\n &#x27;stop&#x27;: 8499}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 293,\\n &#x27;start&#x27;: 6907,\\n &#x27;stop&#x27;: 8015}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 293,\\n &#x27;start&#x27;: 6907,\\n &#x27;stop&#x27;: 8015}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 293,\\n &#x27;start&#x27;: 6907,\\n &#x27;stop&#x27;: 8015}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 293,\\n &#x27;start&#x27;: 6907,\\n &#x27;stop&#x27;: 8015}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 2198,\\n &#x27;start&#x27;: 7177,\\n &#x27;stop&#x27;: 21894}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 2198,\\n &#x27;start&#x27;: 7177,\\n &#x27;stop&#x27;: 21894}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 2198,\\n &#x27;start&#x27;: 7177,\\n &#x27;stop&#x27;: 21894}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 2198,\\n &#x27;start&#x27;: 7177,\\n &#x27;stop&#x27;: 21894}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 5,\\n &#x27;start&#x27;: 5802,\\n &#x27;stop&#x27;: 5814}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 5,\\n &#x27;start&#x27;: 5802,\\n &#x27;stop&#x27;: 5814}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 5,\\n &#x27;start&#x27;: 5802,\\n &#x27;stop&#x27;: 5814}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 5,\\n &#x27;start&#x27;: 5802,\\n &#x27;stop&#x27;: 5814}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 55,\\n &#x27;start&#x27;: 5427,\\n &#x27;stop&#x27;: 5448}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 55,\\n &#x27;start&#x27;: 5427,\\n &#x27;stop&#x27;: 5448}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 55,\\n &#x27;start&#x27;: 5427,\\n &#x27;stop&#x27;: 5448}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 55,\\n &#x27;start&#x27;: 5427,\\n &#x27;stop&#x27;: 5448}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 14,\\n &#x27;start&#x27;: 1021,\\n &#x27;stop&#x27;: 16996}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 14,\\n &#x27;start&#x27;: 1021,\\n &#x27;stop&#x27;: 16996}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 14,\\n &#x27;start&#x27;: 1021,\\n &#x27;stop&#x27;: 16996}","{&#x27;dtype&#x27;: &#x27;float16&#x27;,\\n &#x27;num&#x27;: 14,\\n &#x27;start&#x27;: 1021,\\n &#x27;stop&#x27;: 16996}"],"millisecond":[0.30276209909061436,0.12200179880892392,0.3200438994099386,0.2144389996828977,0.05544519990507979,0.10753410024335608,0.05541110040212516,0.016335800319211558,0.07299689968931489,0.10886169875448104,0.07249750015034806,0.028613099857466295,0.05219049962761346,0.10658619976311456,0.050970000665984116,0.014096499216975644,0.05231950053712353,0.10684440021577757,0.05657399997289758,0.014283599375630729,0.051591200099210255,0.10486329993000254,0.05179150030016899,0.013836100697517395],"rates":[1.0,2.481619960085937,0.9460017817831037,1.4118798331382103,1.0,0.5156057453366327,1.0006153911888984,3.3940914324150993,1.0,0.6705471302073553,1.0068885070234304,2.551170619504447,1.0,0.4896553188274437,1.023945437427547,3.702373108690936,1.0,0.48967938826425816,0.9247976201468482,3.6629073079707006,1.0,0.49198528115792634,0.996132566158581,3.7287384088254893],"stds":[0.0030289753370585644,0.014442233128830622,0.04281682439313228,0.00970036765921376,0.0008500813288159611,0.0017380439681790036,0.0007630046666925045,0.0011267715285038764,0.0018652787238110091,0.001126853757781815,0.000601776439847514,0.001092243491789319,0.0023211608355452624,0.0021275661177354846,0.0007624659651163463,0.0010224568800428935,0.0009397219502983265,0.00115708370786986,0.013065425398908107,0.00041998020040347043,0.000973262513730194,0.0009723574928821677,0.001021772378844525,0.0004225560499422437],"x":[["config1","numpy"],["config1","mxnet"],["config1","jax"],["config1","chainerx"],["config2","numpy"],["config2","mxnet"],["config2","jax"],["config2","chainerx"],["config3","numpy"],["config3","mxnet"],["config3","jax"],["config3","chainerx"],["config4","numpy"],["config4","mxnet"],["config4","jax"],["config4","chainerx"],["config5","numpy"],["config5","mxnet"],["config5","jax"],["config5","chainerx"],["config6","numpy"],["config6","mxnet"],["config6","jax"],["config6","chainerx"]]},"selected":{"id":"1049","type":"Selection"},"selection_policy":{"id":"1048","type":"UnionRenderers"}},"id":"1001","type":"ColumnDataSource"},{"attributes":{},"id":"1026","type":"ResetTool"},{"attributes":{"callback":null,"factors":[["config1","numpy"],["config1","mxnet"],["config1","jax"],["config1","chainerx"],["config2","numpy"],["config2","mxnet"],["config2","jax"],["config2","chainerx"],["config3","numpy"],["config3","mxnet"],["config3","jax"],["config3","chainerx"],["config4","numpy"],["config4","mxnet"],["config4","jax"],["config4","chainerx"],["config5","numpy"],["config5","mxnet"],["config5","jax"],["config5","chainerx"],["config6","numpy"],["config6","mxnet"],["config6","jax"],["config6","chainerx"]],"range_padding":0.1},"id":"1002","type":"FactorRange"},{"attributes":{"axis_label":"Speedup","formatter":{"id":"1044","type":"BasicTickFormatter"},"ticker":{"id":"1018","type":"BasicTicker"}},"id":"1017","type":"LinearAxis"},{"attributes":{"below":[{"id":"1013","type":"CategoricalAxis"}],"center":[{"id":"1016","type":"Grid"},{"id":"1021","type":"Grid"}],"left":[{"id":"1017","type":"LinearAxis"}],"plot_width":800,"renderers":[{"id":"1041","type":"GlyphRenderer"}],"title":{"id":"1004","type":"Title"},"toolbar":{"id":"1029","type":"Toolbar"},"toolbar_location":"above","x_range":{"id":"1002","type":"FactorRange"},"x_scale":{"id":"1009","type":"CategoricalScale"},"y_range":{"id":"1007","type":"DataRange1d"},"y_scale":{"id":"1011","type":"LinearScale"}},"id":"1003","subtype":"Figure","type":"Plot"},{"attributes":{},"id":"1027","type":"HelpTool"},{"attributes":{},"id":"1018","type":"BasicTicker"},{"attributes":{},"id":"1044","type":"BasicTickFormatter"},{"attributes":{"callback":null,"tooltips":[["config","@configs"],["latency","@millisecond ms"],["std_dev","@stds ms"],["speedup","@rates"]]},"id":"1028","type":"HoverTool"},{"attributes":{"bottom":{"value":-0.24858256058836595},"fill_alpha":{"value":0.1},"fill_color":{"value":"#1f77b4"},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"top":{"field":"rates"},"width":{"value":0.9},"x":{"field":"x"}},"id":"1040","type":"VBar"},{"attributes":{"dimension":1,"ticker":{"id":"1018","type":"BasicTicker"}},"id":"1021","type":"Grid"},{"attributes":{"text":"NumPy operator linspace - EC2 p3.8xlarge, GPU, float16, forward only"},"id":"1004","type":"Title"},{"attributes":{},"id":"1046","type":"CategoricalTickFormatter"},{"attributes":{"active_drag":"auto","active_inspect":"auto","active_multi":null,"active_scroll":"auto","active_tap":"auto","tools":[{"id":"1022","type":"PanTool"},{"id":"1023","type":"WheelZoomTool"},{"id":"1024","type":"BoxZoomTool"},{"id":"1025","type":"SaveTool"},{"id":"1026","type":"ResetTool"},{"id":"1027","type":"HelpTool"},{"id":"1028","type":"HoverTool"}]},"id":"1029","type":"Toolbar"},{"attributes":{},"id":"1009","type":"CategoricalScale"},{"attributes":{"data_source":{"id":"1001","type":"ColumnDataSource"},"glyph":{"id":"1039","type":"VBar"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1040","type":"VBar"},"selection_glyph":null,"view":{"id":"1042","type":"CDSView"}},"id":"1041","type":"GlyphRenderer"},{"attributes":{},"id":"1049","type":"Selection"},{"attributes":{"callback":null,"start":-0.24858256058836595},"id":"1007","type":"DataRange1d"},{"attributes":{"bottom_units":"screen","fill_alpha":{"value":0.5},"fill_color":{"value":"lightgrey"},"left_units":"screen","level":"overlay","line_alpha":{"value":1.0},"line_color":{"value":"black"},"line_dash":[4,4],"line_width":{"value":2},"render_mode":"css","right_units":"screen","top_units":"screen"},"id":"1050","type":"BoxAnnotation"},{"attributes":{"end":2,"factors":["numpy","mxnet","jax","chainerx"],"palette":["#756bb1","#43a2ca","#e84d60","#2ca25f"],"start":1},"id":"1037","type":"CategoricalColorMapper"},{"attributes":{"source":{"id":"1001","type":"ColumnDataSource"}},"id":"1042","type":"CDSView"},{"attributes":{},"id":"1011","type":"LinearScale"},{"attributes":{},"id":"1022","type":"PanTool"},{"attributes":{"bottom":{"value":-0.24858256058836595},"fill_color":{"field":"x","transform":{"id":"1037","type":"CategoricalColorMapper"}},"line_color":{"value":"white"},"top":{"field":"rates"},"width":{"value":0.9},"x":{"field":"x"}},"id":"1039","type":"VBar"},{"attributes":{},"id":"1048","type":"UnionRenderers"},{"attributes":{"formatter":{"id":"1046","type":"CategoricalTickFormatter"},"major_label_orientation":1,"ticker":{"id":"1014","type":"CategoricalTicker"}},"id":"1013","type":"CategoricalAxis"},{"attributes":{},"id":"1023","type":"WheelZoomTool"},{"attributes":{},"id":"1014","type":"CategoricalTicker"},{"attributes":{"overlay":{"id":"1050","type":"BoxAnnotation"}},"id":"1024","type":"BoxZoomTool"}],"root_ids":["1003"]},"title":"Bokeh Application","version":"1.3.4"}}';
+          var render_items = [{"docid":"d288ad90-912c-49af-9bcb-76d3e9f4f3e3","roots":{"1003":"92828267-7b43-42cd-8f6c-9427a5b6097c"}}];
+          root.Bokeh.embed.embed_items(docs_json, render_items);
+
+          }
+          if (root.Bokeh !== undefined) {
+            embed_document(root);
+          } else {
+            var attempts = 0;
+            var timer = setInterval(function(root) {
+              if (root.Bokeh !== undefined) {
+                embed_document(root);
+                clearInterval(timer);
+              }
+              attempts++;
+              if (attempts > 100) {
+                console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                clearInterval(timer);
+              }
+            }, 10, root)
+          }
+        })(window);
+      });
+    };
+    if (document.readyState != "loading") fn();
+    else document.addEventListener("DOMContentLoaded", fn);
+  })();
+</script>
+<div class="bk-root" id="92828267-7b43-42cd-8f6c-9427a5b6097c" data-root-id="1003"></div><script type="text/javascript">
+  (function() {
+    var fn = function() {
+      Bokeh.safely(function() {
+        (function(root) {
+          function embed_document(root) {
+
+          var docs_json = '{"44b44490-5b6f-431d-b314-69eeb4eff113":{"roots":{"references":[{"attributes":{},"id":"1011","type":"LinearScale"},{"attributes":{"overlay":{"id":"1050","type":"BoxAnnotation"}},"id":"1024","type":"BoxZoomTool"},{"attributes":{},"id":"1025","type":"SaveTool"},{"attributes":{"grid_line_color":null,"ticker":{"id":"1014","type":"CategoricalTicker"}},"id":"1016","type":"Grid"},{"attributes":{},"id":"1026","type":"ResetTool"},{"attributes":{"callback":null,"data":{"configs":["{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 237,\\n &#x27;start&#x27;: 5112,\\n &#x27;stop&#x27;: 5118}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 237,\\n &#x27;start&#x27;: 5112,\\n &#x27;stop&#x27;: 5118}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 237,\\n &#x27;start&#x27;: 5112,\\n &#x27;stop&#x27;: 5118}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 237,\\n &#x27;start&#x27;: 5112,\\n &#x27;stop&#x27;: 5118}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 49570,\\n &#x27;start&#x27;: 7297,\\n &#x27;stop&#x27;: 8480}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 49570,\\n &#x27;start&#x27;: 7297,\\n &#x27;stop&#x27;: 8480}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 49570,\\n &#x27;start&#x27;: 7297,\\n &#x27;stop&#x27;: 8480}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 49570,\\n &#x27;start&#x27;: 7297,\\n &#x27;stop&#x27;: 8480}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 20120,\\n &#x27;start&#x27;: 7012,\\n &#x27;stop&#x27;: 9348}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 20120,\\n &#x27;start&#x27;: 7012,\\n &#x27;stop&#x27;: 9348}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 20120,\\n &#x27;start&#x27;: 7012,\\n &#x27;stop&#x27;: 9348}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 20120,\\n &#x27;start&#x27;: 7012,\\n &#x27;stop&#x27;: 9348}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 25037,\\n &#x27;start&#x27;: 9143,\\n &#x27;stop&#x27;: 15951}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 25037,\\n &#x27;start&#x27;: 9143,\\n &#x27;stop&#x27;: 15951}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 25037,\\n &#x27;start&#x27;: 9143,\\n &#x27;stop&#x27;: 15951}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 25037,\\n &#x27;start&#x27;: 9143,\\n &#x27;stop&#x27;: 15951}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 50518,\\n &#x27;start&#x27;: 9667,\\n &#x27;stop&#x27;: 9935}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 50518,\\n &#x27;start&#x27;: 9667,\\n &#x27;stop&#x27;: 9935}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 50518,\\n &#x27;start&#x27;: 9667,\\n &#x27;stop&#x27;: 9935}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 50518,\\n &#x27;start&#x27;: 9667,\\n &#x27;stop&#x27;: 9935}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 394,\\n &#x27;start&#x27;: 5082,\\n &#x27;stop&#x27;: 6881}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 394,\\n &#x27;start&#x27;: 5082,\\n &#x27;stop&#x27;: 6881}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 394,\\n &#x27;start&#x27;: 5082,\\n &#x27;stop&#x27;: 6881}","{&#x27;dtype&#x27;: &#x27;uint8&#x27;,\\n &#x27;num&#x27;: 394,\\n &#x27;start&#x27;: 5082,\\n &#x27;stop&#x27;: 6881}"],"millisecond":[0.05110279998916667,0.11011739989044145,0.052738399244844913,0.015467299817828462,0.1866536000306951,0.12157909986854065,0.20832239970332012,0.1374729999952251,0.11219580010219943,0.1148513998487033,0.11065619946748484,0.06353139942802954,0.12104449997423217,0.11394159955671057,0.12178799988760147,0.07541429986304138,0.1888454000436468,0.11986459976469632,0.18934049985546153,0.13736259970755782,0.05155309954716358,0.10699249978642911,0.05265629952191375,0.015337699369410984],"rates":[1.0,0.4640756142082007,0.9689865585778444,3.3039250930057467,1.0,1.5352441351557733,0.8959843026794795,1.35774733974801,1.0,0.9768779505517377,1.01391336989815,1.765989748569894,1.0,1.0623380788505288,0.9938951299466656,1.6050603160681598,1.0,1.5754893472665426,0.9973851351813654,1.3747948891888682,1.0,0.48183844334948944,0.9790490409548993,3.361201592592135],"stds":[0.0008458104077272137,0.002016532145043424,0.001070335673176351,0.000550338150426073,0.002158278485574168,0.0006618068909935796,0.0646865845275304,0.007944824584562025,0.010171006360050748,0.001701388500334654,0.00787760985466018,0.00029877790815275684,0.0013140372207352863,0.0005559814168123566,0.001122882441539435,0.0004531126236149911,0.0013880709490589394,0.000770037015422216,0.004376799995917498,0.001192333982479564,0.0010522331268755809,0.0015597899218292484,0.0016564634604822371,0.0004690086567824288],"x":[["config1","numpy"],["config1","mxnet"],["config1","jax"],["config1","chainerx"],["config2","numpy"],["config2","mxnet"],["config2","jax"],["config2","chainerx"],["config3","numpy"],["config3","mxnet"],["config3","jax"],["config3","chainerx"],["config4","numpy"],["config4","mxnet"],["config4","jax"],["config4","chainerx"],["config5","numpy"],["config5","mxnet"],["config5","jax"],["config5","chainerx"],["config6","numpy"],["config6","mxnet"],["config6","jax"],["config6","chainerx"]]},"selected":{"id":"1048","type":"Selection"},"selection_policy":{"id":"1049","type":"UnionRenderers"}},"id":"1001","type":"ColumnDataSource"},{"attributes":{"axis_label":"Speedup","formatter":{"id":"1045","type":"BasicTickFormatter"},"ticker":{"id":"1018","type":"BasicTicker"}},"id":"1017","type":"LinearAxis"},{"attributes":{"callback":null,"factors":[["config1","numpy"],["config1","mxnet"],["config1","jax"],["config1","chainerx"],["config2","numpy"],["config2","mxnet"],["config2","jax"],["config2","chainerx"],["config3","numpy"],["config3","mxnet"],["config3","jax"],["config3","chainerx"],["config4","numpy"],["config4","mxnet"],["config4","jax"],["config4","chainerx"],["config5","numpy"],["config5","mxnet"],["config5","jax"],["config5","chainerx"],["config6","numpy"],["config6","mxnet"],["config6","jax"],["config6","chainerx"]],"range_padding":0.1},"id":"1002","type":"FactorRange"},{"attributes":{},"id":"1027","type":"HelpTool"},{"attributes":{},"id":"1018","type":"BasicTicker"},{"attributes":{"callback":null,"tooltips":[["config","@configs"],["latency","@millisecond ms"],["std_dev","@stds ms"],["speedup","@rates"]]},"id":"1028","type":"HoverTool"},{"attributes":{},"id":"1045","type":"BasicTickFormatter"},{"attributes":{"dimension":1,"ticker":{"id":"1018","type":"BasicTicker"}},"id":"1021","type":"Grid"},{"attributes":{},"id":"1047","type":"CategoricalTickFormatter"},{"attributes":{"active_drag":"auto","active_inspect":"auto","active_multi":null,"active_scroll":"auto","active_tap":"auto","tools":[{"id":"1022","type":"PanTool"},{"id":"1023","type":"WheelZoomTool"},{"id":"1024","type":"BoxZoomTool"},{"id":"1025","type":"SaveTool"},{"id":"1026","type":"ResetTool"},{"id":"1027","type":"HelpTool"},{"id":"1028","type":"HoverTool"}]},"id":"1029","type":"Toolbar"},{"attributes":{"below":[{"id":"1013","type":"CategoricalAxis"}],"center":[{"id":"1016","type":"Grid"},{"id":"1021","type":"Grid"}],"left":[{"id":"1017","type":"LinearAxis"}],"plot_width":800,"renderers":[{"id":"1041","type":"GlyphRenderer"}],"title":{"id":"1004","type":"Title"},"toolbar":{"id":"1029","type":"Toolbar"},"toolbar_location":"above","x_range":{"id":"1002","type":"FactorRange"},"x_scale":{"id":"1009","type":"CategoricalScale"},"y_range":{"id":"1007","type":"DataRange1d"},"y_scale":{"id":"1011","type":"LinearScale"}},"id":"1003","subtype":"Figure","type":"Plot"},{"attributes":{},"id":"1048","type":"Selection"},{"attributes":{"bottom":{"value":-0.224080106172809},"fill_alpha":{"value":0.1},"fill_color":{"value":"#1f77b4"},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"top":{"field":"rates"},"width":{"value":0.9},"x":{"field":"x"}},"id":"1040","type":"VBar"},{"attributes":{},"id":"1009","type":"CategoricalScale"},{"attributes":{"data_source":{"id":"1001","type":"ColumnDataSource"},"glyph":{"id":"1039","type":"VBar"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1040","type":"VBar"},"selection_glyph":null,"view":{"id":"1042","type":"CDSView"}},"id":"1041","type":"GlyphRenderer"},{"attributes":{"text":"NumPy operator linspace - EC2 p3.8xlarge, GPU, uint8, forward only"},"id":"1004","type":"Title"},{"attributes":{},"id":"1049","type":"UnionRenderers"},{"attributes":{"end":2,"factors":["numpy","mxnet","jax","chainerx"],"palette":["#756bb1","#43a2ca","#e84d60","#2ca25f"],"start":1},"id":"1037","type":"CategoricalColorMapper"},{"attributes":{"bottom":{"value":-0.224080106172809},"fill_color":{"field":"x","transform":{"id":"1037","type":"CategoricalColorMapper"}},"line_color":{"value":"white"},"top":{"field":"rates"},"width":{"value":0.9},"x":{"field":"x"}},"id":"1039","type":"VBar"},{"attributes":{"source":{"id":"1001","type":"ColumnDataSource"}},"id":"1042","type":"CDSView"},{"attributes":{},"id":"1022","type":"PanTool"},{"attributes":{"callback":null,"start":-0.224080106172809},"id":"1007","type":"DataRange1d"},{"attributes":{"bottom_units":"screen","fill_alpha":{"value":0.5},"fill_color":{"value":"lightgrey"},"left_units":"screen","level":"overlay","line_alpha":{"value":1.0},"line_color":{"value":"black"},"line_dash":[4,4],"line_width":{"value":2},"render_mode":"css","right_units":"screen","top_units":"screen"},"id":"1050","type":"BoxAnnotation"},{"attributes":{"formatter":{"id":"1047","type":"CategoricalTickFormatter"},"major_label_orientation":1,"ticker":{"id":"1014","type":"CategoricalTicker"}},"id":"1013","type":"CategoricalAxis"},{"attributes":{},"id":"1023","type":"WheelZoomTool"},{"attributes":{},"id":"1014","type":"CategoricalTicker"}],"root_ids":["1003"]},"title":"Bokeh Application","version":"1.3.4"}}';
+          var render_items = [{"docid":"44b44490-5b6f-431d-b314-69eeb4eff113","roots":{"1003":"9062ab7a-6924-4a9e-8f81-f853d4fa3759"}}];
+          root.Bokeh.embed.embed_items(docs_json, render_items);
+
+          }
+          if (root.Bokeh !== undefined) {
+            embed_document(root);
+          } else {
+            var attempts = 0;
+            var timer = setInterval(function(root) {
+              if (root.Bokeh !== undefined) {
+                embed_document(root);
+                clearInterval(timer);
+              }
+              attempts++;
+              if (attempts > 100) {
+                console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                clearInterval(timer);
+              }
+            }, 10, root)
+          }
+        })(window);
+      });
+    };
+    if (document.readyState != "loading") fn();
+    else document.addEventListener("DOMContentLoaded", fn);
+  })();
+</script>
+<div class="bk-root" id="9062ab7a-6924-4a9e-8f81-f853d4fa3759" data-root-id="1003"></div><script type="text/javascript">
+  (function() {
+    var fn = function() {
+      Bokeh.safely(function() {
+        (function(root) {
+          function embed_document(root) {
+
+          var docs_json = '{"e41c9aaf-8c52-4b7d-8a2d-0493acee24a7":{"roots":{"references":[{"attributes":{"overlay":{"id":"1048","type":"BoxAnnotation"}},"id":"1024","type":"BoxZoomTool"},{"attributes":{},"id":"1014","type":"CategoricalTicker"},{"attributes":{},"id":"1025","type":"SaveTool"},{"attributes":{},"id":"1026","type":"ResetTool"},{"attributes":{"grid_line_color":null,"ticker":{"id":"1014","type":"CategoricalTicker"}},"id":"1016","type":"Grid"},{"attributes":{},"id":"1027","type":"HelpTool"},{"attributes":{"axis_label":"Speedup","formatter":{"id":"1045","type":"BasicTickFormatter"},"ticker":{"id":"1018","type":"BasicTicker"}},"id":"1017","type":"LinearAxis"},{"attributes":{"callback":null,"data":{"configs":["{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 225,\\n &#x27;start&#x27;: 7662,\\n &#x27;stop&#x27;: 8439}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 225,\\n &#x27;start&#x27;: 7662,\\n &#x27;stop&#x27;: 8439}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 225,\\n &#x27;start&#x27;: 7662,\\n &#x27;stop&#x27;: 8439}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 225,\\n &#x27;start&#x27;: 7662,\\n &#x27;stop&#x27;: 8439}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 262,\\n &#x27;start&#x27;: 6534,\\n &#x27;stop&#x27;: 6559}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 262,\\n &#x27;start&#x27;: 6534,\\n &#x27;stop&#x27;: 6559}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 262,\\n &#x27;start&#x27;: 6534,\\n &#x27;stop&#x27;: 6559}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 262,\\n &#x27;start&#x27;: 6534,\\n &#x27;stop&#x27;: 6559}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 82,\\n &#x27;start&#x27;: 6140,\\n &#x27;stop&#x27;: 6918}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 82,\\n &#x27;start&#x27;: 6140,\\n &#x27;stop&#x27;: 6918}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 82,\\n &#x27;start&#x27;: 6140,\\n &#x27;stop&#x27;: 6918}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 82,\\n &#x27;start&#x27;: 6140,\\n &#x27;stop&#x27;: 6918}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 37,\\n &#x27;start&#x27;: 3885,\\n &#x27;stop&#x27;: 4207}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 37,\\n &#x27;start&#x27;: 3885,\\n &#x27;stop&#x27;: 4207}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 37,\\n &#x27;start&#x27;: 3885,\\n &#x27;stop&#x27;: 4207}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 37,\\n &#x27;start&#x27;: 3885,\\n &#x27;stop&#x27;: 4207}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 8414,\\n &#x27;start&#x27;: 2108,\\n &#x27;stop&#x27;: 6727}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 8414,\\n &#x27;start&#x27;: 2108,\\n &#x27;stop&#x27;: 6727}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 8414,\\n &#x27;start&#x27;: 2108,\\n &#x27;stop&#x27;: 6727}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 8414,\\n &#x27;start&#x27;: 2108,\\n &#x27;stop&#x27;: 6727}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 636,\\n &#x27;start&#x27;: 8138,\\n &#x27;stop&#x27;: 22311}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 636,\\n &#x27;start&#x27;: 8138,\\n &#x27;stop&#x27;: 22311}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 636,\\n &#x27;start&#x27;: 8138,\\n &#x27;stop&#x27;: 22311}","{&#x27;dtype&#x27;: &#x27;int8&#x27;,\\n &#x27;num&#x27;: 636,\\n &#x27;start&#x27;: 8138,\\n &#x27;stop&#x27;: 22311}"],"millisecond":[0.05086460005259141,0.11026209976989776,0.05508350113814231,0.015295999764930459,0.051506999443518,0.11312890019326005,0.05274159957480151,0.015088600048329681,0.05001989957236219,0.10875909974856768,0.04954409923811909,0.0147435006510932,0.04942110026604496,0.10872219900193159,0.04971819980710279,0.014362299043568783,0.07518579950556159,0.11752679965866264,0.08438739932898898,0.03546840052877087,0.05277889904391486,0.11124870106868912,0.05633390064758714,0.01587230035511311],"rates":[1.0,0.46130628891286335,0.9234089882019221,3.3253530880152096,1.0,0.4552947951896262,0.9765915303813922,3.413636737572606,1.0,0.45991461577007897,1.0096035722025405,3.392674559189803,1.0,0.45456310412896384,0.9940243302812547,3.4410298877723875,1.0,0.6397332329641107,0.8909600260631989,2.119796731306595,1.0,0.47442260931502644,0.9368940981752425,3.325220532820414],"stds":[0.0008235571430591767,0.001352979139208988,0.008564086510446482,0.0005372991866357404,0.0010266087934209449,0.004088756011539341,0.0022683690348804836,0.0002768854749513729,0.0018199956826192665,0.001279356075949396,0.0007182659572811858,0.0007967003692095808,0.00101268518853954,0.0012201374269733506,0.0010436759169733711,0.00032386640116698767,0.0006893621043242416,0.01212057823505939,0.024394897968557726,0.0014295501562191647,0.001387061886255451,0.0011083975196280328,0.00951108749654109,0.0003683146307071056],"x":[["config1","numpy"],["config1","mxnet"],["config1","jax"],["config1","chainerx"],["config2","numpy"],["config2","mxnet"],["config2","jax"],["config2","chainerx"],["config3","numpy"],["config3","mxnet"],["config3","jax"],["config3","chainerx"],["config4","numpy"],["config4","mxnet"],["config4","jax"],["config4","chainerx"],["config5","numpy"],["config5","mxnet"],["config5","jax"],["config5","chainerx"],["config6","numpy"],["config6","mxnet"],["config6","jax"],["config6","chainerx"]]},"selected":{"id":"1049","type":"Selection"},"selection_policy":{"id":"1050","type":"UnionRenderers"}},"id":"1001","type":"ColumnDataSource"},{"attributes":{},"id":"1045","type":"BasicTickFormatter"},{"attributes":{"callback":null,"tooltips":[["config","@configs"],["latency","@millisecond ms"],["std_dev","@stds ms"],["speedup","@rates"]]},"id":"1028","type":"HoverTool"},{"attributes":{},"id":"1018","type":"BasicTicker"},{"attributes":{"formatter":{"id":"1047","type":"CategoricalTickFormatter"},"major_label_orientation":1,"ticker":{"id":"1014","type":"CategoricalTicker"}},"id":"1013","type":"CategoricalAxis"},{"attributes":{},"id":"1047","type":"CategoricalTickFormatter"},{"attributes":{"dimension":1,"ticker":{"id":"1018","type":"BasicTicker"}},"id":"1021","type":"Grid"},{"attributes":{"below":[{"id":"1013","type":"CategoricalAxis"}],"center":[{"id":"1016","type":"Grid"},{"id":"1021","type":"Grid"}],"left":[{"id":"1017","type":"LinearAxis"}],"plot_width":800,"renderers":[{"id":"1041","type":"GlyphRenderer"}],"title":{"id":"1004","type":"Title"},"toolbar":{"id":"1029","type":"Toolbar"},"toolbar_location":"above","x_range":{"id":"1002","type":"FactorRange"},"x_scale":{"id":"1009","type":"CategoricalScale"},"y_range":{"id":"1007","type":"DataRange1d"},"y_scale":{"id":"1011","type":"LinearScale"}},"id":"1003","subtype":"Figure","type":"Plot"},{"attributes":{"bottom":{"value":-0.22940199251815915},"fill_color":{"field":"x","transform":{"id":"1037","type":"CategoricalColorMapper"}},"line_color":{"value":"white"},"top":{"field":"rates"},"width":{"value":0.9},"x":{"field":"x"}},"id":"1039","type":"VBar"},{"attributes":{"bottom_units":"screen","fill_alpha":{"value":0.5},"fill_color":{"value":"lightgrey"},"left_units":"screen","level":"overlay","line_alpha":{"value":1.0},"line_color":{"value":"black"},"line_dash":[4,4],"line_width":{"value":2},"render_mode":"css","right_units":"screen","top_units":"screen"},"id":"1048","type":"BoxAnnotation"},{"attributes":{"active_drag":"auto","active_inspect":"auto","active_multi":null,"active_scroll":"auto","active_tap":"auto","tools":[{"id":"1022","type":"PanTool"},{"id":"1023","type":"WheelZoomTool"},{"id":"1024","type":"BoxZoomTool"},{"id":"1025","type":"SaveTool"},{"id":"1026","type":"ResetTool"},{"id":"1027","type":"HelpTool"},{"id":"1028","type":"HoverTool"}]},"id":"1029","type":"Toolbar"},{"attributes":{"bottom":{"value":-0.22940199251815915},"fill_alpha":{"value":0.1},"fill_color":{"value":"#1f77b4"},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"top":{"field":"rates"},"width":{"value":0.9},"x":{"field":"x"}},"id":"1040","type":"VBar"},{"attributes":{},"id":"1049","type":"Selection"},{"attributes":{"data_source":{"id":"1001","type":"ColumnDataSource"},"glyph":{"id":"1039","type":"VBar"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1040","type":"VBar"},"selection_glyph":null,"view":{"id":"1042","type":"CDSView"}},"id":"1041","type":"GlyphRenderer"},{"attributes":{"callback":null,"start":-0.22940199251815915},"id":"1007","type":"DataRange1d"},{"attributes":{},"id":"1009","type":"CategoricalScale"},{"attributes":{},"id":"1050","type":"UnionRenderers"},{"attributes":{"source":{"id":"1001","type":"ColumnDataSource"}},"id":"1042","type":"CDSView"},{"attributes":{"end":2,"factors":["numpy","mxnet","jax","chainerx"],"palette":["#756bb1","#43a2ca","#e84d60","#2ca25f"],"start":1},"id":"1037","type":"CategoricalColorMapper"},{"attributes":{"callback":null,"factors":[["config1","numpy"],["config1","mxnet"],["config1","jax"],["config1","chainerx"],["config2","numpy"],["config2","mxnet"],["config2","jax"],["config2","chainerx"],["config3","numpy"],["config3","mxnet"],["config3","jax"],["config3","chainerx"],["config4","numpy"],["config4","mxnet"],["config4","jax"],["config4","chainerx"],["config5","numpy"],["config5","mxnet"],["config5","jax"],["config5","chainerx"],["config6","numpy"],["config6","mxnet"],["config6","jax"],["config6","chainerx"]],"range_padding":0.1},"id":"1002","type":"FactorRange"},{"attributes":{},"id":"1022","type":"PanTool"},{"attributes":{},"id":"1011","type":"LinearScale"},{"attributes":{},"id":"1023","type":"WheelZoomTool"},{"attributes":{"text":"NumPy operator linspace - EC2 p3.8xlarge, GPU, int8, forward only"},"id":"1004","type":"Title"}],"root_ids":["1003"]},"title":"Bokeh Application","version":"1.3.4"}}';
+          var render_items = [{"docid":"e41c9aaf-8c52-4b7d-8a2d-0493acee24a7","roots":{"1003":"bb286b84-208a-4046-8d01-4ed7253c4ce1"}}];
+          root.Bokeh.embed.embed_items(docs_json, render_items);
+
+          }
+          if (root.Bokeh !== undefined) {
+            embed_document(root);
+          } else {
+            var attempts = 0;
+            var timer = setInterval(function(root) {
+              if (root.Bokeh !== undefined) {
+                embed_document(root);
+                clearInterval(timer);
+              }
+              attempts++;
+              if (attempts > 100) {
+                console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                clearInterval(timer);
+              }
+            }, 10, root)
+          }
+        })(window);
+      });
+    };
+    if (document.readyState != "loading") fn();
+    else document.addEventListener("DOMContentLoaded", fn);
+  })();
+</script>
+<div class="bk-root" id="bb286b84-208a-4046-8d01-4ed7253c4ce1" data-root-id="1003"></div><script type="text/javascript">
+  (function() {
+    var fn = function() {
+      Bokeh.safely(function() {
+        (function(root) {
+          function embed_document(root) {
+
+          var docs_json = '{"6c8e9781-dac8-4680-99b0-475937e4771f":{"roots":{"references":[{"attributes":{},"id":"1023","type":"WheelZoomTool"},{"attributes":{},"id":"1014","type":"CategoricalTicker"},{"attributes":{"overlay":{"id":"1050","type":"BoxAnnotation"}},"id":"1024","type":"BoxZoomTool"},{"attributes":{},"id":"1025","type":"SaveTool"},{"attributes":{"grid_line_color":null,"ticker":{"id":"1014","type":"CategoricalTicker"}},"id":"1016","type":"Grid"},{"attributes":{"callback":null,"data":{"configs":["{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 17662,\\n &#x27;start&#x27;: 2513,\\n &#x27;stop&#x27;: 4243}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 17662,\\n &#x27;start&#x27;: 2513,\\n &#x27;stop&#x27;: 4243}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 17662,\\n &#x27;start&#x27;: 2513,\\n &#x27;stop&#x27;: 4243}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 17662,\\n &#x27;start&#x27;: 2513,\\n &#x27;stop&#x27;: 4243}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 3112,\\n &#x27;start&#x27;: 4802,\\n &#x27;stop&#x27;: 4836}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 3112,\\n &#x27;start&#x27;: 4802,\\n &#x27;stop&#x27;: 4836}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 3112,\\n &#x27;start&#x27;: 4802,\\n &#x27;stop&#x27;: 4836}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 3112,\\n &#x27;start&#x27;: 4802,\\n &#x27;stop&#x27;: 4836}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 4215,\\n &#x27;start&#x27;: 8460,\\n &#x27;stop&#x27;: 8483}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 4215,\\n &#x27;start&#x27;: 8460,\\n &#x27;stop&#x27;: 8483}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 4215,\\n &#x27;start&#x27;: 8460,\\n &#x27;stop&#x27;: 8483}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 4215,\\n &#x27;start&#x27;: 8460,\\n &#x27;stop&#x27;: 8483}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 832,\\n &#x27;start&#x27;: 939,\\n &#x27;stop&#x27;: 1720}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 832,\\n &#x27;start&#x27;: 939,\\n &#x27;stop&#x27;: 1720}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 832,\\n &#x27;start&#x27;: 939,\\n &#x27;stop&#x27;: 1720}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 832,\\n &#x27;start&#x27;: 939,\\n &#x27;stop&#x27;: 1720}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 158,\\n &#x27;start&#x27;: 8793,\\n &#x27;stop&#x27;: 9166}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 158,\\n &#x27;start&#x27;: 8793,\\n &#x27;stop&#x27;: 9166}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 158,\\n &#x27;start&#x27;: 8793,\\n &#x27;stop&#x27;: 9166}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 158,\\n &#x27;start&#x27;: 8793,\\n &#x27;stop&#x27;: 9166}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 6769,\\n &#x27;start&#x27;: 486,\\n &#x27;stop&#x27;: 1563}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 6769,\\n &#x27;start&#x27;: 486,\\n &#x27;stop&#x27;: 1563}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 6769,\\n &#x27;start&#x27;: 486,\\n &#x27;stop&#x27;: 1563}","{&#x27;dtype&#x27;: &#x27;int32&#x27;,\\n &#x27;num&#x27;: 6769,\\n &#x27;start&#x27;: 486,\\n &#x27;stop&#x27;: 1563}"],"millisecond":[0.10057160034193657,0.1153542998508783,0.10873789906327147,0.06178700023156125,0.06048570103303064,0.11755850027839188,0.06121639962657355,0.021636499877786264,0.06423859958886169,0.1142712000728352,0.06481419986812398,0.02452509979775641,0.05442580004455522,0.10940450047201011,0.05410740013758186,0.016041000344557688,0.05517060017155018,0.11407989986764733,0.052505400162772276,0.015263399109244347,0.07076149959175382,0.11465239913377445,0.07027040010143537,0.03062969990423881],"rates":[1.0,0.8718496013754863,0.9248992412794074,1.6277145672232176,1.0,0.5145157593010597,0.9880636790467873,2.7955400076113985,1.0,0.5621591402550836,0.9911192257185393,2.6193002319500582,1.0,0.4974731369344301,1.0058845907614067,3.3929180771460143,1.0,0.48361367984682435,1.050760493216231,3.6145684048932356,1.0,0.6171828947878405,1.006988710603747,2.31022503690809],"stds":[0.0028878830927940354,0.0010814809732857791,0.023866487222981205,0.010936593921382194,0.0008160965209880482,0.009703866321837621,0.0022483991190715004,0.0003299744156014521,0.0006190089525329449,0.011188671112342377,0.001959049358704817,0.0004083731597862256,0.0009327028702993509,0.0009388792467293161,0.0006003069708817195,0.00023680033986439854,0.009749476635819073,0.012641614756440472,0.0015061554386230417,0.0014089301276289878,0.0012503221841817201,0.009645926591216743,0.0011673705990600943,0.0003565992242100339],"x":[["config1","numpy"],["config1","mxnet"],["config1","jax"],["config1","chainerx"],["config2","numpy"],["config2","mxnet"],["config2","jax"],["config2","chainerx"],["config3","numpy"],["config3","mxnet"],["config3","jax"],["config3","chainerx"],["config4","numpy"],["config4","mxnet"],["config4","jax"],["config4","chainerx"],["config5","numpy"],["config5","mxnet"],["config5","jax"],["config5","chainerx"],["config6","numpy"],["config6","mxnet"],["config6","jax"],["config6","chainerx"]]},"selected":{"id":"1048","type":"Selection"},"selection_policy":{"id":"1049","type":"UnionRenderers"}},"id":"1001","type":"ColumnDataSource"},{"attributes":{},"id":"1026","type":"ResetTool"},{"attributes":{"callback":null,"factors":[["config1","numpy"],["config1","mxnet"],["config1","jax"],["config1","chainerx"],["config2","numpy"],["config2","mxnet"],["config2","jax"],["config2","chainerx"],["config3","numpy"],["config3","mxnet"],["config3","jax"],["config3","chainerx"],["config4","numpy"],["config4","mxnet"],["config4","jax"],["config4","chainerx"],["config5","numpy"],["config5","mxnet"],["config5","jax"],["config5","chainerx"],["config6","numpy"],["config6","mxnet"],["config6","jax"],["config6","chainerx"]],"range_padding":0.1},"id":"1002","type":"FactorRange"},{"attributes":{"axis_label":"Speedup","formatter":{"id":"1045","type":"BasicTickFormatter"},"ticker":{"id":"1018","type":"BasicTicker"}},"id":"1017","type":"LinearAxis"},{"attributes":{},"id":"1011","type":"LinearScale"},{"attributes":{},"id":"1027","type":"HelpTool"},{"attributes":{},"id":"1018","type":"BasicTicker"},{"attributes":{},"id":"1045","type":"BasicTickFormatter"},{"attributes":{"callback":null,"tooltips":[["config","@configs"],["latency","@millisecond ms"],["std_dev","@stds ms"],["speedup","@rates"]]},"id":"1028","type":"HoverTool"},{"attributes":{"bottom":{"value":-0.24097122699288237},"fill_alpha":{"value":0.1},"fill_color":{"value":"#1f77b4"},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"top":{"field":"rates"},"width":{"value":0.9},"x":{"field":"x"}},"id":"1040","type":"VBar"},{"attributes":{"dimension":1,"ticker":{"id":"1018","type":"BasicTicker"}},"id":"1021","type":"Grid"},{"attributes":{},"id":"1048","type":"Selection"},{"attributes":{"active_drag":"auto","active_inspect":"auto","active_multi":null,"active_scroll":"auto","active_tap":"auto","tools":[{"id":"1022","type":"PanTool"},{"id":"1023","type":"WheelZoomTool"},{"id":"1024","type":"BoxZoomTool"},{"id":"1025","type":"SaveTool"},{"id":"1026","type":"ResetTool"},{"id":"1027","type":"HelpTool"},{"id":"1028","type":"HoverTool"}]},"id":"1029","type":"Toolbar"},{"attributes":{"below":[{"id":"1013","type":"CategoricalAxis"}],"center":[{"id":"1016","type":"Grid"},{"id":"1021","type":"Grid"}],"left":[{"id":"1017","type":"LinearAxis"}],"plot_width":800,"renderers":[{"id":"1041","type":"GlyphRenderer"}],"title":{"id":"1004","type":"Title"},"toolbar":{"id":"1029","type":"Toolbar"},"toolbar_location":"above","x_range":{"id":"1002","type":"FactorRange"},"x_scale":{"id":"1009","type":"CategoricalScale"},"y_range":{"id":"1007","type":"DataRange1d"},"y_scale":{"id":"1011","type":"LinearScale"}},"id":"1003","subtype":"Figure","type":"Plot"},{"attributes":{"data_source":{"id":"1001","type":"ColumnDataSource"},"glyph":{"id":"1039","type":"VBar"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1040","type":"VBar"},"selection_glyph":null,"view":{"id":"1042","type":"CDSView"}},"id":"1041","type":"GlyphRenderer"},{"attributes":{},"id":"1049","type":"UnionRenderers"},{"attributes":{},"id":"1009","type":"CategoricalScale"},{"attributes":{},"id":"1047","type":"CategoricalTickFormatter"},{"attributes":{"bottom":{"value":-0.24097122699288237},"fill_color":{"field":"x","transform":{"id":"1037","type":"CategoricalColorMapper"}},"line_color":{"value":"white"},"top":{"field":"rates"},"width":{"value":0.9},"x":{"field":"x"}},"id":"1039","type":"VBar"},{"attributes":{"text":"NumPy operator linspace - EC2 p3.8xlarge, GPU, int32, forward only"},"id":"1004","type":"Title"},{"attributes":{"bottom_units":"screen","fill_alpha":{"value":0.5},"fill_color":{"value":"lightgrey"},"left_units":"screen","level":"overlay","line_alpha":{"value":1.0},"line_color":{"value":"black"},"line_dash":[4,4],"line_width":{"value":2},"render_mode":"css","right_units":"screen","top_units":"screen"},"id":"1050","type":"BoxAnnotation"},{"attributes":{"source":{"id":"1001","type":"ColumnDataSource"}},"id":"1042","type":"CDSView"},{"attributes":{"end":2,"factors":["numpy","mxnet","jax","chainerx"],"palette":["#756bb1","#43a2ca","#e84d60","#2ca25f"],"start":1},"id":"1037","type":"CategoricalColorMapper"},{"attributes":{},"id":"1022","type":"PanTool"},{"attributes":{"callback":null,"start":-0.24097122699288237},"id":"1007","type":"DataRange1d"},{"attributes":{"formatter":{"id":"1047","type":"CategoricalTickFormatter"},"major_label_orientation":1,"ticker":{"id":"1014","type":"CategoricalTicker"}},"id":"1013","type":"CategoricalAxis"}],"root_ids":["1003"]},"title":"Bokeh Application","version":"1.3.4"}}';
+          var render_items = [{"docid":"6c8e9781-dac8-4680-99b0-475937e4771f","roots":{"1003":"6512333b-d231-4025-ac0e-10d90972a04d"}}];
+          root.Bokeh.embed.embed_items(docs_json, render_items);
+
+          }
+          if (root.Bokeh !== undefined) {
+            embed_document(root);
+          } else {
+            var attempts = 0;
+            var timer = setInterval(function(root) {
+              if (root.Bokeh !== undefined) {
+                embed_document(root);
+                clearInterval(timer);
+              }
+              attempts++;
+              if (attempts > 100) {
+                console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                clearInterval(timer);
+              }
+            }, 10, root)
+          }
+        })(window);
+      });
+    };
+    if (document.readyState != "loading") fn();
+    else document.addEventListener("DOMContentLoaded", fn);
+  })();
+</script>
+<div class="bk-root" id="6512333b-d231-4025-ac0e-10d90972a04d" data-root-id="1003"></div><script type="text/javascript">
+  (function() {
+    var fn = function() {
+      Bokeh.safely(function() {
+        (function(root) {
+          function embed_document(root) {
+
+          var docs_json = '{"1feaccec-d67c-4683-bfaf-66ea5a7a36c7":{"roots":{"references":[{"attributes":{"overlay":{"id":"1050","type":"BoxAnnotation"}},"id":"1024","type":"BoxZoomTool"},{"attributes":{},"id":"1014","type":"CategoricalTicker"},{"attributes":{"callback":null,"data":{"configs":["{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 13,\\n &#x27;start&#x27;: 7857,\\n &#x27;stop&#x27;: 8125}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 13,\\n &#x27;start&#x27;: 7857,\\n &#x27;stop&#x27;: 8125}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 13,\\n &#x27;start&#x27;: 7857,\\n &#x27;stop&#x27;: 8125}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 13,\\n &#x27;start&#x27;: 7857,\\n &#x27;stop&#x27;: 8125}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 21,\\n &#x27;start&#x27;: 784,\\n &#x27;stop&#x27;: 30340}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 21,\\n &#x27;start&#x27;: 784,\\n &#x27;stop&#x27;: 30340}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 21,\\n &#x27;start&#x27;: 784,\\n &#x27;stop&#x27;: 30340}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 21,\\n &#x27;start&#x27;: 784,\\n &#x27;stop&#x27;: 30340}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 31555,\\n &#x27;start&#x27;: 8009,\\n &#x27;stop&#x27;: 10751}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 31555,\\n &#x27;start&#x27;: 8009,\\n &#x27;stop&#x27;: 10751}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 31555,\\n &#x27;start&#x27;: 8009,\\n &#x27;stop&#x27;: 10751}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 31555,\\n &#x27;start&#x27;: 8009,\\n &#x27;stop&#x27;: 10751}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 77,\\n &#x27;start&#x27;: 9754,\\n &#x27;stop&#x27;: 11108}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 77,\\n &#x27;start&#x27;: 9754,\\n &#x27;stop&#x27;: 11108}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 77,\\n &#x27;start&#x27;: 9754,\\n &#x27;stop&#x27;: 11108}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 77,\\n &#x27;start&#x27;: 9754,\\n &#x27;stop&#x27;: 11108}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 4970,\\n &#x27;start&#x27;: 3080,\\n &#x27;stop&#x27;: 3303}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 4970,\\n &#x27;start&#x27;: 3080,\\n &#x27;stop&#x27;: 3303}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 4970,\\n &#x27;start&#x27;: 3080,\\n &#x27;stop&#x27;: 3303}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 4970,\\n &#x27;start&#x27;: 3080,\\n &#x27;stop&#x27;: 3303}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 18,\\n &#x27;start&#x27;: 8001,\\n &#x27;stop&#x27;: 8011}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 18,\\n &#x27;start&#x27;: 8001,\\n &#x27;stop&#x27;: 8011}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 18,\\n &#x27;start&#x27;: 8001,\\n &#x27;stop&#x27;: 8011}","{&#x27;dtype&#x27;: &#x27;int64&#x27;,\\n &#x27;num&#x27;: 18,\\n &#x27;start&#x27;: 8001,\\n &#x27;stop&#x27;: 8011}"],"millisecond":[0.04955359981977381,0.10598219923849683,0.050869899860117584,0.014049400124349631,0.049813299483503215,0.10956140104099177,0.04996210045646876,0.017566299720783718,0.14765619962417986,0.1145460999396164,0.17462940013501793,0.106367399712326,0.050086400005966425,0.11355140013620257,0.050570400708238594,0.014140699931886047,0.06639059974986594,0.1089485998818418,0.06990119982219767,0.026791600612341426,0.051449299644446,0.10687600042729173,0.04915779973089229,0.013833099001203664],"rates":[1.0,0.46756530979566635,0.9741241865235956,3.5270971985409036,1.0,0.45466103034649813,0.9970217230339387,2.835730932255823,1.0,1.2890547971691542,0.8455403243097483,1.3881715640649366,1.0,0.4410901137800927,0.9904291701174257,3.542002888628303,1.0,0.6093754286137559,0.9497776850574616,2.4780378265001244,1.0,0.4813924495560368,1.0466151846929321,3.7192894838654182],"stds":[0.0007813222253435385,0.0011482213393055115,0.0008848234400746023,0.0005102650456014265,0.0016611448194352213,0.0014541542849236463,0.0010581542307382724,0.010461993759023371,0.0013013637549009872,0.0011965701375978742,0.07797248782685594,0.03855125069216836,0.0007427549614869396,0.013434005701314089,0.001705488224079549,0.00022760198221725853,0.0006423608055518964,0.0016261775232083828,0.010270004025213917,0.0006618386129063541,0.003968884901931798,0.001242822027564759,0.0011084603418835613,0.00024413675413010403],"x":[["config1","numpy"],["config1","mxnet"],["config1","jax"],["config1","chainerx"],["config2","numpy"],["config2","mxnet"],["config2","jax"],["config2","chainerx"],["config3","numpy"],["config3","mxnet"],["config3","jax"],["config3","chainerx"],["config4","numpy"],["config4","mxnet"],["config4","jax"],["config4","chainerx"],["config5","numpy"],["config5","mxnet"],["config5","jax"],["config5","chainerx"],["config6","numpy"],["config6","mxnet"],["config6","jax"],["config6","chainerx"]]},"selected":{"id":"1048","type":"Selection"},"selection_policy":{"id":"1049","type":"UnionRenderers"}},"id":"1001","type":"ColumnDataSource"},{"attributes":{},"id":"1025","type":"SaveTool"},{"attributes":{},"id":"1026","type":"ResetTool"},{"attributes":{"grid_line_color":null,"ticker":{"id":"1014","type":"CategoricalTicker"}},"id":"1016","type":"Grid"},{"attributes":{"callback":null,"factors":[["config1","numpy"],["config1","mxnet"],["config1","jax"],["config1","chainerx"],["config2","numpy"],["config2","mxnet"],["config2","jax"],["config2","chainerx"],["config3","numpy"],["config3","mxnet"],["config3","jax"],["config3","chainerx"],["config4","numpy"],["config4","mxnet"],["config4","jax"],["config4","chainerx"],["config5","numpy"],["config5","mxnet"],["config5","jax"],["config5","chainerx"],["config6","numpy"],["config6","mxnet"],["config6","jax"],["config6","chainerx"]],"range_padding":0.1},"id":"1002","type":"FactorRange"},{"attributes":{},"id":"1027","type":"HelpTool"},{"attributes":{"axis_label":"Speedup","formatter":{"id":"1047","type":"BasicTickFormatter"},"ticker":{"id":"1018","type":"BasicTicker"}},"id":"1017","type":"LinearAxis"},{"attributes":{},"id":"1011","type":"LinearScale"},{"attributes":{"callback":null,"tooltips":[["config","@configs"],["latency","@millisecond ms"],["std_dev","@stds ms"],["speedup","@rates"]]},"id":"1028","type":"HoverTool"},{"attributes":{},"id":"1018","type":"BasicTicker"},{"attributes":{},"id":"1047","type":"BasicTickFormatter"},{"attributes":{"active_drag":"auto","active_inspect":"auto","active_multi":null,"active_scroll":"auto","active_tap":"auto","tools":[{"id":"1022","type":"PanTool"},{"id":"1023","type":"WheelZoomTool"},{"id":"1024","type":"BoxZoomTool"},{"id":"1025","type":"SaveTool"},{"id":"1026","type":"ResetTool"},{"id":"1027","type":"HelpTool"},{"id":"1028","type":"HoverTool"}]},"id":"1029","type":"Toolbar"},{"attributes":{},"id":"1048","type":"Selection"},{"attributes":{"below":[{"id":"1013","type":"CategoricalAxis"}],"center":[{"id":"1016","type":"Grid"},{"id":"1021","type":"Grid"}],"left":[{"id":"1017","type":"LinearAxis"}],"plot_width":800,"renderers":[{"id":"1041","type":"GlyphRenderer"}],"title":{"id":"1004","type":"Title"},"toolbar":{"id":"1029","type":"Toolbar"},"toolbar_location":"above","x_range":{"id":"1002","type":"FactorRange"},"x_scale":{"id":"1009","type":"CategoricalScale"},"y_range":{"id":"1007","type":"DataRange1d"},"y_scale":{"id":"1011","type":"LinearScale"}},"id":"1003","subtype":"Figure","type":"Plot"},{"attributes":{"bottom":{"value":-0.24795263225769454},"fill_alpha":{"value":0.1},"fill_color":{"value":"#1f77b4"},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"top":{"field":"rates"},"width":{"value":0.9},"x":{"field":"x"}},"id":"1040","type":"VBar"},{"attributes":{},"id":"1049","type":"UnionRenderers"},{"attributes":{"data_source":{"id":"1001","type":"ColumnDataSource"},"glyph":{"id":"1039","type":"VBar"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1040","type":"VBar"},"selection_glyph":null,"view":{"id":"1042","type":"CDSView"}},"id":"1041","type":"GlyphRenderer"},{"attributes":{},"id":"1009","type":"CategoricalScale"},{"attributes":{"end":2,"factors":["numpy","mxnet","jax","chainerx"],"palette":["#756bb1","#43a2ca","#e84d60","#2ca25f"],"start":1},"id":"1037","type":"CategoricalColorMapper"},{"attributes":{"text":"NumPy operator linspace - EC2 p3.8xlarge, GPU, int64, forward only"},"id":"1004","type":"Title"},{"attributes":{"bottom_units":"screen","fill_alpha":{"value":0.5},"fill_color":{"value":"lightgrey"},"left_units":"screen","level":"overlay","line_alpha":{"value":1.0},"line_color":{"value":"black"},"line_dash":[4,4],"line_width":{"value":2},"render_mode":"css","right_units":"screen","top_units":"screen"},"id":"1050","type":"BoxAnnotation"},{"attributes":{},"id":"1022","type":"PanTool"},{"attributes":{"source":{"id":"1001","type":"ColumnDataSource"}},"id":"1042","type":"CDSView"},{"attributes":{},"id":"1045","type":"CategoricalTickFormatter"},{"attributes":{"bottom":{"value":-0.24795263225769454},"fill_color":{"field":"x","transform":{"id":"1037","type":"CategoricalColorMapper"}},"line_color":{"value":"white"},"top":{"field":"rates"},"width":{"value":0.9},"x":{"field":"x"}},"id":"1039","type":"VBar"},{"attributes":{"dimension":1,"ticker":{"id":"1018","type":"BasicTicker"}},"id":"1021","type":"Grid"},{"attributes":{"callback":null,"start":-0.24795263225769454},"id":"1007","type":"DataRange1d"},{"attributes":{},"id":"1023","type":"WheelZoomTool"},{"attributes":{"formatter":{"id":"1045","type":"CategoricalTickFormatter"},"major_label_orientation":1,"ticker":{"id":"1014","type":"CategoricalTicker"}},"id":"1013","type":"CategoricalAxis"}],"root_ids":["1003"]},"title":"Bokeh Application","version":"1.3.4"}}';
+          var render_items = [{"docid":"1feaccec-d67c-4683-bfaf-66ea5a7a36c7","roots":{"1003":"04765671-d9a1-4bd0-b5fe-514f71b17ae9"}}];
+          root.Bokeh.embed.embed_items(docs_json, render_items);
+
+          }
+          if (root.Bokeh !== undefined) {
+            embed_document(root);
+          } else {
+            var attempts = 0;
+            var timer = setInterval(function(root) {
+              if (root.Bokeh !== undefined) {
+                embed_document(root);
+                clearInterval(timer);
+              }
+              attempts++;
+              if (attempts > 100) {
+                console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                clearInterval(timer);
+              }
+            }, 10, root)
+          }
+        })(window);
+      });
+    };
+    if (document.readyState != "loading") fn();
+    else document.addEventListener("DOMContentLoaded", fn);
+  })();
+</script>
+<div class="bk-root" id="04765671-d9a1-4bd0-b5fe-514f71b17ae9" data-root-id="1003"></div></div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sum.html" class="btn btn-neutral float-right" title="Operator sum" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="arange.html" class="btn btn-neutral float-left" title="Operator arange" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, hgt312
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Device Switcher</span>
+        Current device: GPU
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Devices</dt>
+            
+            
+                
+            
+            
+                <dd><a href=../../cpu/reports/linspace.html>CPU</a></dd>
+                <dd><a href="">GPU</a></dd>
+            
+        </dl>
+    </div>
+</div>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
