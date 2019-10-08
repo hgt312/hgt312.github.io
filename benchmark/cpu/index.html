@@ -152,7 +152,7 @@
             
   <div class="section" id="numpy-compatible-operator-benchmark">
 <h1>NumPy Compatible Operator Benchmark<a class="headerlink" href="#numpy-compatible-operator-benchmark" title="Permalink to this headline">¶</a></h1>
-<p>Built on Sep 25, 2019.</p>
+<p>Built on Oct 08, 2019.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="report.html">Operator reports</a><ul>
@@ -225,40 +225,17 @@ pip install -e .
 <ol class="arabic">
 <li><p class="first">Install MXNet from source:</p>
 <p><a class="reference external" href="http://mxnet.incubator.apache.org/versions/master/install/ubuntu_setup.html">http://mxnet.incubator.apache.org/versions/master/install/ubuntu_setup.html</a></p>
+<p>In cmake flags, add <code class="docutils literal notranslate"><span class="pre">-DCMAKE_BUILD_TYPE=RELEASE</span></code>.</p>
 <p>With TVM support, add <code class="docutils literal notranslate"><span class="pre">-DUSE_TVM_OP=ON</span></code>.</p>
 </li>
 <li><p class="first">Install Jax</p>
-<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span># CPU-only version
-pip install --upgrade jax jaxlib
-
-# with GPU supported
-PYTHON_VERSION=cp37  # alternatives: cp27, cp35, cp36, cp37
-CUDA_VERSION=cuda92  # alternatives: cuda90, cuda92, cuda100
-PLATFORM=linux_x86_64  # alternatives: linux_x86_64
-BASE_URL=&#39;https://storage.googleapis.com/jax-releases&#39;
-pip install --upgrade $BASE_URL/$CUDA_VERSION/jaxlib-0.1.28-$PYTHON_VERSION-none-$PLATFORM.whl
-
-pip install --upgrade jax  # install jax
-</pre></div>
-</div>
-</li>
-<li><p class="first">Install ChainerX</p>
-<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span># CPU-only version
-export CHAINER_BUILD_CHAINERX=1
-export MAKEFLAGS=-j8  # Using 8 parallel jobs.
-pip install --pre chainer
-
-# with GPU supported
-export CHAINER_BUILD_CHAINERX=1
-export CHAINERX_BUILD_CUDA=1
-export CUDNN_ROOT_DIR=path/to/cudnn
-export MAKEFLAGS=-j8  # Using 8 parallel jobs.
-pip install --pre cupy
-pip install --pre chainer
-</pre></div>
-</div>
 </li>
 </ol>
+<p><a class="reference external" href="https://github.com/google/jax#pip-installation">https://github.com/google/jax#pip-installation</a></p>
+<ol class="arabic simple">
+<li>Install ChainerX</li>
+</ol>
+<p><a class="reference external" href="https://docs.chainer.org/en/stable/chainerx/install/index.html">https://docs.chainer.org/en/stable/chainerx/install/index.html</a></p>
 </div>
 <div class="section" id="install-necessary-dependencies">
 <h3>Install necessary dependencies<a class="headerlink" href="#install-necessary-dependencies" title="Permalink to this headline">¶</a></h3>
@@ -289,15 +266,34 @@ sphinx-build -b html . _build/cpu -A current_device=CPU
 </div>
 <div class="section" id="simple-usage">
 <h2>Simple usage<a class="headerlink" href="#simple-usage" title="Permalink to this headline">¶</a></h2>
+<p>Except generate reports in the website, this python package can be used to run some random benchmarks in CMD/jupyter notebook.</p>
+<p>Note that you need to determine if gpu is visiable by set environment <code class="docutils literal notranslate"><span class="pre">CUDA_VISIBLE_DEVICES</span></code>. Then, before starting benchmark, run helper function to set default device.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">NumpyXBench.utils</span> <span class="kn">import</span> <span class="n">global_set_cpu</span><span class="p">,</span> <span class="n">global_set_gpu</span>
+
+<span class="n">global_set_gpu</span><span class="p">()</span>  <span class="c1"># global_set_cpu()</span>
+</pre></div>
+</div>
 <ol class="arabic simple">
 <li>Obtain an op from a toolkit which contains its default config</li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">NumpyXBench.toolkits</span> <span class="kn">import</span> <span class="n">add_toolkit</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># random config</span>
+<span class="kn">from</span> <span class="nn">NumpyXBench.toolkits</span> <span class="kn">import</span> <span class="n">add_toolkit</span>
 
 <span class="n">toolkit</span> <span class="o">=</span> <span class="n">add_toolkit</span>
 <span class="n">op</span> <span class="o">=</span> <span class="n">toolkit</span><span class="o">.</span><span class="n">get_operator_cls</span><span class="p">()(</span><span class="s1">&#39;np&#39;</span><span class="p">)</span>
 <span class="n">config</span> <span class="o">=</span> <span class="n">toolkit</span><span class="o">.</span><span class="n">get_random_config_func</span><span class="p">(</span><span class="s1">&#39;RealTypes&#39;</span><span class="p">)()</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">toolkit</span><span class="o">.</span><span class="n">get_benchmark_func</span><span class="p">()(</span><span class="n">op</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="s1">&#39;forward&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># determined config</span>
+<span class="kn">from</span> <span class="nn">NumpyXBench.toolkits</span> <span class="kn">import</span> <span class="n">broadcast_divide_toolkit</span>
+
+<span class="n">toolkit</span> <span class="o">=</span> <span class="n">broadcast_divide_toolkit</span>
+<span class="n">op</span> <span class="o">=</span> <span class="n">toolkit</span><span class="o">.</span><span class="n">get_operator_cls</span><span class="p">()(</span><span class="s1">&#39;mx&#39;</span><span class="p">)</span>
+<span class="n">configs</span> <span class="o">=</span> <span class="n">toolkit</span><span class="o">.</span><span class="n">get_determined_config_func</span><span class="p">([</span><span class="s1">&#39;float32&#39;</span><span class="p">])()</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">configs</span><span class="p">:</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">toolkit</span><span class="o">.</span><span class="n">get_benchmark_func</span><span class="p">()(</span><span class="n">op</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="s1">&#39;backward&#39;</span><span class="p">,</span> <span class="n">warmup</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">runs</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 </pre></div>
 </div>
 <ol class="arabic simple">
@@ -308,7 +304,7 @@ sphinx-build -b html . _build/cpu -A current_device=CPU
 <span class="kn">from</span> <span class="nn">NumpyXBench.utils</span> <span class="kn">import</span> <span class="n">run_binary_op_benchmark</span>
 
 <span class="n">op</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
-<span class="n">config</span> <span class="o">=</span> <span class="n">get_random_size_config</span><span class="p">()</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">get_random_size_config</span><span class="p">([</span><span class="s1">&#39;float32&#39;</span><span class="p">])</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">run_binary_op_benchmark</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="s1">&#39;forward&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -322,7 +318,7 @@ sphinx-build -b html . _build/cpu -A current_device=CPU
 </pre></div>
 </div>
 <ol class="arabic simple">
-<li>Test all registered toolkits and brief visualization.</li>
+<li>Test registered toolkits and brief visualization. The data generated from function <code class="docutils literal notranslate"><span class="pre">run_op_frameworks_benchmark</span></code> can be fed to <code class="docutils literal notranslate"><span class="pre">draw_one_plot</span></code>.</li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">NumpyXBench.tools</span> <span class="kn">import</span> <span class="n">test_all_operators</span><span class="p">,</span> <span class="n">draw_one_plot</span><span class="p">,</span> <span class="n">test_operators</span>
 <span class="kn">from</span> <span class="nn">NumpyXBench</span> <span class="kn">import</span> <span class="n">toolkits</span>
